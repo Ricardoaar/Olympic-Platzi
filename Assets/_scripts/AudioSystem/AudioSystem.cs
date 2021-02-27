@@ -56,13 +56,13 @@ public class AudioSystem : MonoBehaviour
     public void StopSFXLoop() => _sfxLoop.Stop();
 
     public void SetGeneralVolume(float volume)
-        => _mixer.SetFloat("GeneralVolume", Util.LinearTologarithmic(volume));
+        => _mixer.SetFloat("GeneralVolume", Util.LinearToLogarithmic(volume));
 
     public void SetBgmlVolume(float volume)
-        => _mixer.SetFloat("BGMVolume", Util.LinearTologarithmic(volume));
+        => _mixer.SetFloat("BGMVolume", Util.LinearToLogarithmic(volume));
 
     public void SetSfxVolume(float volume)
-        => _mixer.SetFloat("SFXVolume", Util.LinearTologarithmic(volume));
+        => _mixer.SetFloat("SFXVolume", Util.LinearToLogarithmic(volume));
 
     public void ChangeMusic()
     {
