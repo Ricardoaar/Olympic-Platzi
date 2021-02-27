@@ -53,5 +53,10 @@ public static class Util
         return n1 * n1 + n2 * n2;
     }
 
-    
+    /// <summary>
+    /// Convert a linear value to a logarithmic.
+    /// </summary>
+    /// <param name="value">Linear value to convert.</param>
+    /// <returns>Logarithmic value.</returns>
+    public static float LinearTologarithmic(float value) => Mathf.Log(value) * 20;
 }
