@@ -52,6 +52,4 @@ public static class Util
 
         return n1 * n1 + n2 * n2;
     }
-
-    
 }
