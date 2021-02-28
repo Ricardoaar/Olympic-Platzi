@@ -42,8 +42,8 @@ public class FadeOnClickCanvas : MonoBehaviour
 
         if (!(textFade is null))
             textFade.color = _goOn
-                ? new Color(textFade.color.r, textFade.color.g, textFade.color.b, textFade.color.a + 0.1f)
-                : new Color(textFade.color.r, textFade.color.g, textFade.color.b, textFade.color.a - 0.1f);
+                ? new Color(textFade.color.r, textFade.color.g, textFade.color.b, textFade.color.a + 0.05f)
+                : new Color(textFade.color.r, textFade.color.g, textFade.color.b, textFade.color.a - 0.05f);
     }
 
     /// <summary>
