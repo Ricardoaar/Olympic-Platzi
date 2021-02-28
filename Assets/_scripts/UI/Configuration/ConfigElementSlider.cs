@@ -9,9 +9,4 @@ public class ConfigElementSlider : ConfigElementBase
     {
         _slider.value = PlayerPrefs.GetFloat(configParameter, 0.9f);
     }
-
-    /*private void OnDisable()
-    {
-        _slider.value = 1.0f;
-    }*/
 }

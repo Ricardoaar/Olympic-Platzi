@@ -8,13 +8,13 @@ public class AudioSystemSerializer : MonoBehaviour
     private void Start()
     {
         _mixer.SetFloat("GeneralVolume",
-            Util.LinearTologarithmic(PlayerPrefs.GetFloat("GeneralVolume", 0.9f))
+            Util.LinearToLogarithmic(PlayerPrefs.GetFloat("GeneralVolume", 0.9f))
         );
         _mixer.SetFloat("BGMVolume",
-            Util.LinearTologarithmic(PlayerPrefs.GetFloat("BGMVolume", 0.9f))
+            Util.LinearToLogarithmic(PlayerPrefs.GetFloat("BGMVolume", 0.9f))
         );
         _mixer.SetFloat("SFXVolume",
-            Util.LinearTologarithmic(PlayerPrefs.GetFloat("SFXVolume", 0.9f))
+            Util.LinearToLogarithmic(PlayerPrefs.GetFloat("SFXVolume", 0.9f))
         );
     }
 
