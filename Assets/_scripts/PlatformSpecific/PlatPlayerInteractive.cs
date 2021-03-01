@@ -19,7 +19,10 @@ public class PlatPlayerInteractive : MonoBehaviour
     private void SetGroundStatus()
     {
         animator.SetBool(AnimatorGroundCheck, checker.CheckRayToLayer());
-        animator.SetFloat(AnimatorGroundDistance, checker.GetRay(2).distance);
+        if (checker.GetRay(2))
+        {
+            animator.SetFloat(AnimatorGroundDistance, checker.GetRay(2).distance);
+        }
     }
 
 
