@@ -2,9 +2,18 @@
 using System.Collections;
 using UnityEngine;
 
+public delegate void Vector2Event(Vector2 vector);
+
+public delegate void GenericEvent();
+
+
 public class PlayerPlatformInput : MonoBehaviour
 {
     #region Declarations
+
+    public static Vector2Event OnPlayerMove;
+    public static GenericEvent OnPlayerJump;
+
 
     [Header("Components")] [SerializeField]
     private Rigidbody2D playerRb;
@@ -58,24 +67,21 @@ public class PlayerPlatformInput : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
+        //   if (playerRb.velocity == Vector2.zero) return;
+
         if (_climbing)
         {
             playerRb.velocity = moveVelocity * _direction / 2;
-
-
-            // (_direction * moveVelocity).sqrMagnitude > moveVelocity
-
-            // ? (_direction * moveVelocity).normalized
-
-            // : _direction * moveVelocity;
         }
         else
         {
             playerRb.velocity =
                 new Vector2(_direction.x * moveVelocity, playerRb.velocity.y);
         }
+
+        OnPlayerMove.Invoke(playerRb.velocity);
     }
 
 
@@ -121,6 +127,7 @@ public class PlayerPlatformInput : MonoBehaviour
     private void Jump()
     {
         if (!rayLayerChecker.CheckRayToLayer()) return;
+        OnPlayerJump?.Invoke();
         playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
     }
 
