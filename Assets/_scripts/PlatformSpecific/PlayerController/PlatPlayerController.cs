@@ -9,6 +9,7 @@ using UnityEngine.InputSystem.Utilities;
 public class @PlatPlayerController : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
+
     public @PlatPlayerController()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -227,18 +228,42 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Jump;
     private readonly InputAction m_Main_CancelAction;
+
     public struct MainActions
     {
         private @PlatPlayerController m_Wrapper;
-        public MainActions(@PlatPlayerController wrapper) { m_Wrapper = wrapper; }
+
+        public MainActions(@PlatPlayerController wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Jump => m_Wrapper.m_Main_Jump;
         public InputAction @CancelAction => m_Wrapper.m_Main_CancelAction;
-        public InputActionMap Get() { return m_Wrapper.m_Main; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Main;
+        }
+
+        public void Enable()
+        {
+            Get().Enable();
+        }
+
+        public void Disable()
+        {
+            Get().Disable();
+        }
+
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MainActions set) { return set.Get(); }
+
+        public static implicit operator InputActionMap(MainActions set)
+        {
+            return set.Get();
+        }
+
         public void SetCallbacks(IMainActions instance)
         {
             if (m_Wrapper.m_MainActionsCallbackInterface != null)
@@ -253,6 +278,7 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                 @CancelAction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnCancelAction;
                 @CancelAction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnCancelAction;
             }
+
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
             {
@@ -268,7 +294,9 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
             }
         }
     }
+
     public MainActions @Main => new MainActions(this);
+
     public interface IMainActions
     {
         void OnMovement(InputAction.CallbackContext context);
