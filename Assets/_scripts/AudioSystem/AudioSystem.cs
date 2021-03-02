@@ -7,10 +7,13 @@ public class AudioSystem : MonoBehaviour
 
     [SerializeField, Tooltip("AudioSource para la música de fondo")]
     private AudioSource _bgm;
+
     [SerializeField, Tooltip("AudioSource para los efectos de sonidos")]
     private AudioSource _sfx;
+
     [SerializeField, Tooltip("AudioSource para los efectos de sonidos en loop")]
     private AudioSource _sfxLoop;
+
     [SerializeField, Tooltip("Main AudioMixer")]
     private AudioMixer _mixer;
 

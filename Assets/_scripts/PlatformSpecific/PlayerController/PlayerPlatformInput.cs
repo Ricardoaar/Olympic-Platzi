@@ -6,7 +6,6 @@ public delegate void Vector2Event(Vector2 vector);
 
 public delegate void GenericEvent();
 
-
 public class PlayerPlatformInput : MonoBehaviour
 {
     #region Declarations
@@ -59,6 +58,20 @@ public class PlayerPlatformInput : MonoBehaviour
         ControllerAssign();
     }
 
+    private void OnReloadGame()
+    {
+        playerRb.bodyType = RigidbodyType2D.Dynamic;
+        _controller.Enable();
+    }
+
+
+    private void OnDamage()
+    {
+        playerRb.bodyType = RigidbodyType2D.Static;
+        _controller.Disable();
+    }
+
+
     private void Update()
     {
         if (_inLadder)
@@ -75,7 +88,7 @@ public class PlayerPlatformInput : MonoBehaviour
         {
             playerRb.velocity = moveVelocity * _direction / 2;
         }
-        else
+        else if (playerRb.bodyType == RigidbodyType2D.Dynamic)
         {
             playerRb.velocity =
                 new Vector2(_direction.x * moveVelocity, playerRb.velocity.y);
@@ -102,11 +115,15 @@ public class PlayerPlatformInput : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManagePlatform.OnReloadGame += OnReloadGame;
+        PlatPlayerInteractive.OnDamage += OnDamage;
         _controller.Enable();
     }
 
     private void OnDisable()
     {
+        GameManagePlatform.OnReloadGame -= OnReloadGame;
+        PlatPlayerInteractive.OnDamage -= OnDamage;
         _controller.Disable();
     }
 
