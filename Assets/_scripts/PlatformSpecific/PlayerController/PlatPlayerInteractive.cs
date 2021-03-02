@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -20,21 +21,10 @@ public class PlatPlayerInteractive : MonoBehaviour
     private static readonly int AnimatorJumpTrig = Animator.StringToHash("Jump");
     private static readonly int AnimatorGroundCheck = Animator.StringToHash("IsOnGround");
     private static readonly int AnimatorGroundDistance = Animator.StringToHash("DistanceToGround");
-    private static readonly int LastX = Animator.StringToHash("LastX");
+    private static readonly int AnimatorLastX = Animator.StringToHash("LastX");
+    private static readonly int AnimatorDash = Animator.StringToHash("Dash");
 
     private readonly List<GameObject> _rootChild = new List<GameObject>();
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.layer != LayerMask.NameToLayer("DamagePlayer")) return;
-
-        if (other.transform.parent.TryGetComponent(typeof(GhostBehavior), out var dummy))
-        {
-            //    CollisionWithGhost(other);
-        }
-
-        //CollisionWithEnemy();
-    }
 
     private void CollisionWithEnemy()
     {
@@ -45,18 +35,36 @@ public class PlatPlayerInteractive : MonoBehaviour
         ChangePlayerComponents(false);
     }
 
-    private void CollisionWithGhost(Collision2D ghost)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("DamagePlayer")) return;
+        var killEnemy = false;
+        if (other.transform.parent.TryGetComponent(typeof(GhostBehavior), out var dummy))
+        {
+            CollisionWithGhost(other, out killEnemy);
+        }
+
+        if (!killEnemy)
+        {
+            CollisionWithEnemy();
+        }
+    }
+
+    private void CollisionWithGhost(Collider2D ghost, out bool killEnemy)
     {
         var ghostType = ghost.transform.parent.GetComponent<GhostBehavior>();
-
+        killEnemy = false;
         switch (ghostType.GetGhostType)
         {
-            case GhostBehavior.GhostType.Dark
-                when root.transform.rotation == Quaternion.Euler(new Vector3(0, 180, 0)):
+            case GhostBehavior.GhostType.Dark when Math.Abs(root.transform.eulerAngles.y - 180) < 0.5f &&
+                                                   transform.position.x + 0.2f > ghost.transform.position.x:
                 ghostType.Die();
+                killEnemy = true;
                 return;
-            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity:
+            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity &&
+                                                    transform.position.x - 0.2f < ghost.transform.position.x:
                 ghostType.Die();
+                killEnemy = true;
                 return;
         }
     }
@@ -83,11 +91,9 @@ public class PlatPlayerInteractive : MonoBehaviour
 
     private void SetGroundStatus()
     {
-        animator.SetBool(AnimatorGroundCheck, checker.CheckRayToLayer());
-        if (checker.GetRay(2))
-        {
-            animator.SetFloat(AnimatorGroundDistance, checker.GetRay(2).distance);
-        }
+        var onGround = checker.CheckRayToLayer();
+        animator.SetBool(AnimatorGroundCheck, onGround);
+        animator.SetFloat(AnimatorGroundDistance, checker.GetRay().distance);
     }
 
     private void Awake()
@@ -117,7 +123,7 @@ public class PlatPlayerInteractive : MonoBehaviour
     {
         if (move.x != 0)
         {
-            animator.SetFloat(LastX, move.x);
+            animator.SetFloat(AnimatorLastX, move.x);
         }
 
         if (move.x < 0)
@@ -148,13 +154,20 @@ public class PlatPlayerInteractive : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerPlatformInput.OnDash += OnDash;
         PlayerPlatformInput.OnPlayerMove += UpdateAnimationMovement;
         GameManagePlatform.OnReloadGame += OnReloadScene;
         PlayerPlatformInput.OnPlayerJump += OnPlayerJump;
     }
 
+    private void OnDash()
+    {
+        animator.SetTrigger(AnimatorDash);
+    }
+
     private void OnDisable()
     {
+        PlayerPlatformInput.OnDash -= OnDash;
         PlayerPlatformInput.OnPlayerJump -= OnPlayerJump;
         PlayerPlatformInput.OnPlayerMove -= UpdateAnimationMovement;
         GameManagePlatform.OnReloadGame -= OnReloadScene;

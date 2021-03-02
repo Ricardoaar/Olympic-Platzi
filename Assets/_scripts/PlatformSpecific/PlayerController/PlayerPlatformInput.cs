@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void Vector2Event(Vector2 vector);
@@ -88,7 +89,7 @@ public class PlayerPlatformInput : MonoBehaviour
         {
             playerRb.velocity = moveVelocity * _direction / 2;
         }
-        else if (playerRb.bodyType == RigidbodyType2D.Dynamic)
+        else if (playerRb.bodyType == RigidbodyType2D.Dynamic && CanDash)
         {
             playerRb.velocity =
                 new Vector2(_direction.x * moveVelocity, playerRb.velocity.y);
@@ -115,6 +116,7 @@ public class PlayerPlatformInput : MonoBehaviour
 
     private void OnEnable()
     {
+        CanDash = true;
         GameManagePlatform.OnReloadGame += OnReloadGame;
         PlatPlayerInteractive.OnDamage += OnDamage;
         _controller.Enable();
@@ -137,13 +139,38 @@ public class PlayerPlatformInput : MonoBehaviour
         _controller.Main.Movement.performed += ctx => _direction = ctx.ReadValue<Vector2>();
         _controller.Main.Movement.canceled += ctx => _direction = Vector2.zero;
         _controller.Main.Jump.performed += ctx => Jump();
-        _controller.Main.CancelAction.performed += ctx => _cancelingAction = true;
-        _controller.Main.CancelAction.canceled += ctx => _cancelingAction = false;
+        _controller.Main.CancelAction.performed += ctx => Dash();
     }
+
+    [SerializeField] private float dashForce;
+
+    private void Dash()
+    {
+        if (!CanDash || !rayLayerChecker.CheckRayToLayer()) return;
+
+        playerRb.velocity = Vector2.zero;
+
+        playerRb.AddForce(50 * Vector2.right * (transform.rotation == Quaternion.identity ? 1 : -1) * dashForce,
+            ForceMode2D.Force);
+
+        CanDash = false;
+        OnDash.Invoke();
+    }
+
+    public static bool CanDash;
+    public static Action OnDash;
+
+    // private IEnumerator ReloadDash()
+    // {
+    //     yield return new WaitForSeconds(0.8f);
+    //     _canDash = true;
+    // }
+
 
     private void Jump()
     {
         if (!rayLayerChecker.CheckRayToLayer()) return;
+        CanDash = true;
         OnPlayerJump?.Invoke();
         playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
     }

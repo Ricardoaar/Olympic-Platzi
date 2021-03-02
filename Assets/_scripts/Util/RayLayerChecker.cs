@@ -38,6 +38,9 @@ public class RayLayerChecker : MonoBehaviour
         Vector2.down,
         lDistance > 0 ? lDistance : distance, layerToCheck);
 
+    public RaycastHit2D GetRay() => Physics2D.Raycast(new Vector3(transform.position.x, _min.y),
+        Vector2.down, 50, layerToCheck);
+
 
     /// <summary>
     /// Check if a specific position is on touching the layer

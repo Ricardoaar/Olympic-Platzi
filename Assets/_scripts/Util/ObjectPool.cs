@@ -52,6 +52,7 @@ public class ObjectPool : MonoBehaviour
         }
 
         var obj = _objects.Dequeue();
+        obj.transform.SetParent(transform);
         return obj;
     }
 
