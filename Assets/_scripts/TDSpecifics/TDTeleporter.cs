@@ -11,24 +11,25 @@ public class TDTeleporter : MonoBehaviour
     [Header("Internal Components")]
     [SerializeField] private Collider2D _collider;
 
-    private GameObject _player;
+    private TDPlayerController _player;
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {
             _animation.Play();
-            _player = collider.gameObject;
+            _player = collider.GetComponent<TDPlayerController>();
         }
     }
 
     public void Teleport()
     {
-        _player.transform.position = _pointToTeleport.position;
-        _camera.transform.position = new Vector3(
-            _pointToTeleport.position.x, _camera.transform.position.y, -10
-        );
-        _player.GetComponent<TDPlayerController>().SwitchInputs();
-        _collider.enabled = false;
+        if (_player != null)
+        {
+            _player.Teleport(_pointToTeleport.position);
+            _player.SetCheckPoint(_pointToTeleport.position);
+            _player.SwitchInputs();
+            _collider.enabled = false;
+        }
     }
 }

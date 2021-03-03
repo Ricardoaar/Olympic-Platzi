@@ -25,7 +25,7 @@ public class AudioSystem : MonoBehaviour
             SI = this;
     }
 
-    void Update() => ChangeMusic();
+    //void Update() => ChangeMusic();
 
     /// <summary>
     /// Play background music
