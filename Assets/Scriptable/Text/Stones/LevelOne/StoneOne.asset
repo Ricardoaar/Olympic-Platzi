@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: StoneOne
+  m_EditorClassIdentifier: 
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: 3c19b97d199c813479b1385b038492f0, type: 2}
+  - {fileID: 11400000, guid: 614402f553220864595ea0fc8bc6f5f2, type: 2}

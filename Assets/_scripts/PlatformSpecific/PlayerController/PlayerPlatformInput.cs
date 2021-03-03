@@ -6,7 +6,6 @@ public delegate void Vector2Event(Vector2 vector);
 
 public delegate void GenericEvent();
 
-
 public class PlayerPlatformInput : MonoBehaviour
 {
     #region Declarations
@@ -22,18 +21,21 @@ public class PlayerPlatformInput : MonoBehaviour
 
     [SerializeField] private RayLayerChecker rayLayerChecker;
     private PlatPlayerController _controller;
-    private Collider2D _ladderCollider;
 
     [Header("Move Variables")] [SerializeField, Range(1, 20)]
     private float moveVelocity;
 
+
     [SerializeField, Range(1, 20)] private float jumpForce;
 
+    private Collider2D _ladderCollider;
     private Vector2 _direction;
     private bool _climbing;
     private bool _inLadder;
     private Coroutine _cCheckLadder;
-    private bool _cancelingAction;
+
+
+    private bool doingAction = true;
 
     #endregion
 
@@ -59,6 +61,20 @@ public class PlayerPlatformInput : MonoBehaviour
         ControllerAssign();
     }
 
+    private void OnReloadGame()
+    {
+        playerRb.bodyType = RigidbodyType2D.Dynamic;
+        _controller.Enable();
+    }
+
+
+    private void OnDamage()
+    {
+        playerRb.bodyType = RigidbodyType2D.Static;
+        _controller.Disable();
+    }
+
+
     private void Update()
     {
         if (_inLadder)
@@ -75,7 +91,7 @@ public class PlayerPlatformInput : MonoBehaviour
         {
             playerRb.velocity = moveVelocity * _direction / 2;
         }
-        else
+        else if (playerRb.bodyType == RigidbodyType2D.Dynamic && CanDash)
         {
             playerRb.velocity =
                 new Vector2(_direction.x * moveVelocity, playerRb.velocity.y);
@@ -102,11 +118,16 @@ public class PlayerPlatformInput : MonoBehaviour
 
     private void OnEnable()
     {
+        CanDash = true;
+        GameManagePlatform.OnReloadGame += OnReloadGame;
+        PlatPlayerInteractive.OnDamage += OnDamage;
         _controller.Enable();
     }
 
     private void OnDisable()
     {
+        GameManagePlatform.OnReloadGame -= OnReloadGame;
+        PlatPlayerInteractive.OnDamage -= OnDamage;
         _controller.Disable();
     }
 
@@ -120,21 +141,86 @@ public class PlayerPlatformInput : MonoBehaviour
         _controller.Main.Movement.performed += ctx => _direction = ctx.ReadValue<Vector2>();
         _controller.Main.Movement.canceled += ctx => _direction = Vector2.zero;
         _controller.Main.Jump.performed += ctx => Jump();
-        _controller.Main.CancelAction.performed += ctx => _cancelingAction = true;
-        _controller.Main.CancelAction.canceled += ctx => _cancelingAction = false;
+        _controller.Main.CancelAction.performed += ctx => Dash();
+        _controller.Main.Shirnk.performed += ctx => Shrink(true);
+        _controller.Main.Shirnk.canceled += ctx => Shrink(false);
     }
+
+    private void Shrink(bool pressed)
+    {
+        if (_cShrink is null)
+        {
+            _cShrink = StartCoroutine(MakeShrink(pressed));
+        }
+        else
+        {
+            StopCoroutine(_cShrink);
+            _cShrink = StartCoroutine(MakeShrink(pressed));
+        }
+
+        //        transform.localScale = pressed ? new Vector3(0.5f, 0.5f, 1.0f) : new Vector3(1.0f, 1.0f, 1.0f);
+    }
+
+    private Coroutine _cShrink;
+
+
+    private IEnumerator MakeShrink(bool pressed)
+    {
+        var targetScale =
+            pressed ? new Vector3(0.4f, 0.4f, 1.0f) : new Vector3(1.0f, 1.1f, 1.1f);
+
+        while (Math.Abs(transform.localScale.x - targetScale.x) > 0.1f)
+        {
+            transform.localScale =
+                new Vector3(Mathf.Lerp(transform.localScale.x, targetScale.x, 2.0f * Time.deltaTime),
+                    Mathf.Lerp(transform.localScale.y, targetScale.y, 2.0f * Time.deltaTime), 1);
+            yield return new WaitForEndOfFrame();
+        }
+
+        _cShrink = null;
+    }
+
+
+    [SerializeField] private float dashForce;
+
+    private void Dash()
+    {
+        if (!CanDash || !rayLayerChecker.CheckRayToLayer()) return;
+
+        playerRb.velocity = Vector2.zero;
+
+        playerRb.AddForce(50 * Vector2.right * (transform.rotation == Quaternion.identity ? 1 : -1) * dashForce,
+            ForceMode2D.Force);
+
+        CanDash = false;
+        OnDash.Invoke();
+    }
+
+    public static bool CanDash;
+    public static Action OnDash;
+
+    // private IEnumerator ReloadDash()
+    // {
+    //     yield return new WaitForSeconds(0.8f);
+    //     _canDash = true;
+    // }
+
 
     private void Jump()
     {
         if (!rayLayerChecker.CheckRayToLayer()) return;
+        playerRb.velocity = !CanDash
+            ? new Vector2(playerRb.velocity.x, jumpForce * 1.2f)
+            : new Vector2(playerRb.velocity.x, jumpForce);
+
+        CanDash = true;
         OnPlayerJump?.Invoke();
-        playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
     }
 
     private void LadderClimb()
     {
         if (transform.position.y >= _ladderCollider.bounds.max.y && _direction.y > 0 ||
-            _direction.y == 0 && !_cancelingAction) return;
+            _direction.y == 0 && !doingAction) return;
         //Check just if is not climbing and player want to climb
         if (_direction.y != 0 && !_climbing)
             if (!(transform.position.y < _ladderCollider.bounds.min.y && _direction.y < 0))
@@ -147,7 +233,7 @@ public class PlayerPlatformInput : MonoBehaviour
             }
 
         //Check if player wants to leave ladder
-        if (!_cancelingAction &&
+        if (!doingAction &&
             (!(transform.position.y - _ladderCollider.bounds.min.y < 0.2f) || !(_direction.y < 0) ||
              !_climbing)) return;
         ExitLadder();

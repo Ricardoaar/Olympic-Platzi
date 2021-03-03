@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.UI;
 
 public static class Util
 {
@@ -59,4 +61,38 @@ public static class Util
     /// <param name="value">Linear value to convert.</param>
     /// <returns>Logarithmic value.</returns>
     public static float LinearToLogarithmic(float value) => Mathf.Log10(value) * 20;
+
+    // ReSharper disable once UnusedMember.Local
+    public static float GetAngleFromTwoVectors(Vector3 origin, Vector3 destiny)
+
+    {
+        var x = Mathf.Abs(origin.x - destiny.x);
+
+        var y = Mathf.Abs(origin.x - destiny.x);
+
+        return Mathf.Atan2(x, y);
+    }
+
+
+    #region Color Effect
+
+    public static Color InterpolateFade(bool goOn, SpriteRenderer spriteFade, float fadeDifference = 0.01f)
+    {
+        return new Color(spriteFade.color.r, spriteFade.color.g, spriteFade.color.b,
+            spriteFade.color.a + (goOn ? fadeDifference : -fadeDifference));
+    }
+
+    public static Color InterpolateFade(bool goOn, Image imageFade, float fadeDifference = 0.01f)
+    {
+        return new Color(imageFade.color.r, imageFade.color.g, imageFade.color.b,
+            imageFade.color.a + (goOn ? fadeDifference : -fadeDifference));
+    }
+
+    public static Color InterpolateFade(bool goOn, TextMeshProUGUI imageFade, float fadeDifference = 0.01f)
+    {
+        return new Color(imageFade.color.r, imageFade.color.g, imageFade.color.b,
+            imageFade.color.a + (goOn ? fadeDifference : -fadeDifference));
+    }
+
+    #endregion
 }
