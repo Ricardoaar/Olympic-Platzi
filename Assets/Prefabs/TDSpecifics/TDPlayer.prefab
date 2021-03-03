@@ -54,6 +54,7 @@ MonoBehaviour:
   _rigidBody: {fileID: 325038563586881242}
   _input: {fileID: 325038563586881246}
   _animator: {fileID: 162529570063692521}
+  _camera: {fileID: 0}
 --- !u!114 &550850263704851696
 MonoBehaviour:
   m_ObjectHideFlags: 0

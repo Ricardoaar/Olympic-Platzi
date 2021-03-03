@@ -11,8 +11,11 @@ public class TDPlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private PlayerInput _input;
     [SerializeField] private Animator _animator;
+    [Header("External Components")]
+    [SerializeField] private Camera _camera;
 
     private Vector2 _direction;
+    private Vector3 _checkPoint;
 
     private void FixedUpdate()
     {
@@ -60,4 +63,27 @@ public class TDPlayerController : MonoBehaviour
                 break;
         }
     }
+
+    public void Die()
+    {
+        _input.currentActionMap.Disable();
+        _animator.SetTrigger("Die");
+    }
+
+    public void Reset()
+    {
+        _animator.SetTrigger("Reset");
+        _input.currentActionMap.Enable();
+        Teleport(_checkPoint);
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        transform.position = position;
+        _camera.transform.position = new Vector3(
+            position.x, _camera.transform.position.y, -10
+        );
+    }
+
+    public void SetCheckPoint(Vector3 position) => _checkPoint = position;
 }
