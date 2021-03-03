@@ -25,8 +25,9 @@ public class DifficultyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.realtimeSinceStartup % 15 == 0)
+        if (Time.realtimeSinceStartup / 15 >= 0.9996f && Time.realtimeSinceStartup / 15 <= 1f)
         {
+            Debug.Log("IncreaseDifficulty");
             IncreaseDifficulty();
         }
     }
