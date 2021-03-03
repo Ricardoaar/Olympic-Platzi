@@ -187,7 +187,7 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e20f4639-f66a-49fd-b2e2-11e7ad4d7f14"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

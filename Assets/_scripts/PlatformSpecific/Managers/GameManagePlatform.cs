@@ -10,11 +10,6 @@ public class GameManagePlatform : MonoBehaviour
     [SerializeField] private Transform initialPosition;
     private Coroutine _cReloadScene;
 
-    private void Start()
-    {
-        OnReloadGame.Invoke();
-    }
-
     private void OnEnable()
     {
         PlatPlayerInteractive.OnDamage += OnPlayerDamage;

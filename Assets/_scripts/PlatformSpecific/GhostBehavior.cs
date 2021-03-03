@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -127,11 +128,12 @@ public class GhostBehavior : DieOnAnimationFinishComponent
             yield return new WaitForEndOfFrame();
         }
 
-        gameObject.SetActive(false);
+        StartCoroutine(DieCoroutine());
     }
 
     private IEnumerator DieCoroutine()
     {
+        ghostCollider.enabled = false;
         ghostAnimator.SetBool(AnimatorIsAlive, false);
         while (!canDead)
         {
@@ -145,35 +147,33 @@ public class GhostBehavior : DieOnAnimationFinishComponent
             yield return new WaitForEndOfFrame();
         }
 
-        gameObject.SetActive(false);
+        OnDamagePlayer();
     }
 
     public void Die()
     {
-        ghostCollider.enabled = false;
         StopAllCoroutines();
         StartCoroutine(DieCoroutine());
     }
+
 
     private void OnEnable()
     {
         SetValues();
         StopAllCoroutines();
         StartCoroutine(PrepareAttack());
-        PlatPlayerInteractive.OnDamage += DisableGhost;
-        PlatPlayerInteractive.OnStoneEnter += DisableGhost;
-    }
-
-    private void DisableGhost()
-    {
-        gameObject.SetActive(false);
+        PlatPlayerInteractive.OnDamage += Die;
+        PlatPlayerInteractive.OnDamage += OnDamagePlayer;
     }
 
     private void OnDisable()
     {
-        PlatPlayerInteractive.OnDamage -= DisableGhost;
-        PlatPlayerInteractive.OnStoneEnter -= DisableGhost;
+        PlatPlayerInteractive.OnDamage -= Die;
+        PlatPlayerInteractive.OnDamage -= OnDamagePlayer;
+    }
 
+    private void OnDamagePlayer()
+    {
         ghostSpawnSystem.OnGhostDisable(gameObject);
     }
 
