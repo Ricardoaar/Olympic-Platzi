@@ -37,6 +37,11 @@ public class AudioSystem : MonoBehaviour
         _bgm.Play();
     }
 
+    public void StopBGM()
+    {
+        _bgm.Stop();
+    }
+
     /// <summary>
     /// Play sound effect
     /// </summary>

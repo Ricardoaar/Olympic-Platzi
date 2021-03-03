@@ -30,17 +30,6 @@ public class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// Fill the  queue
-    /// </summary>
-    private void FillQueue()
-    {
-        for (var i = 0; i < amount; i++)
-        {
-            EnqueueObj(CreateObj());
-        }
-    }
-
-    /// <summary>
     /// Return an object of the pool, if the pool is almost empty is filled again
     /// </summary>
     /// <returns></returns>
@@ -52,8 +41,20 @@ public class ObjectPool : MonoBehaviour
         }
 
         var obj = _objects.Dequeue();
-        obj.transform.SetParent(transform);
+        obj.transform.parent = transform;
+
         return obj;
+    }
+
+    /// <summary>
+    /// Fill the  queue
+    /// </summary>
+    private void FillQueue()
+    {
+        for (var i = 0; i < amount; i++)
+        {
+            EnqueueObj(CreateObj());
+        }
     }
 
     /// <summary>
@@ -62,6 +63,7 @@ public class ObjectPool : MonoBehaviour
     /// <param name="gameObj"></param>
     public void EnqueueObj(GameObject gameObj)
     {
+        gameObj.transform.SetParent(transform);
         _objects.Enqueue(gameObj);
     }
 }

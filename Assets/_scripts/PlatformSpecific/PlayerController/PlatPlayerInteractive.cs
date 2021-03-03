@@ -30,13 +30,22 @@ public class PlatPlayerInteractive : MonoBehaviour
     {
         var mainParticleModule = onDieParticles.main;
         mainParticleModule.startColor = root.transform.eulerAngles.y == 0 ? dieParticleColor : Color.black;
-        Instantiate(onDieParticles, transform.position, Quaternion.identity);
+        var partSys = Instantiate(onDieParticles, transform.position, Quaternion.identity);
         OnDamage.Invoke();
         ChangePlayerComponents(false);
+        Destroy(partSys, 3);
     }
+
+    private bool _inStone = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("TextStone") && !_inStone)
+        {
+            _inStone = true;
+            OnStoneEnter.Invoke();
+        }
+
         if (other.gameObject.layer != LayerMask.NameToLayer("DamagePlayer")) return;
         var killEnemy = false;
         if (other.transform.parent.TryGetComponent(typeof(GhostBehavior), out var dummy))
@@ -49,6 +58,9 @@ public class PlatPlayerInteractive : MonoBehaviour
             CollisionWithEnemy();
         }
     }
+
+    public static Action OnStoneEnter;
+
 
     private void CollisionWithGhost(Collider2D ghost, out bool killEnemy)
     {
@@ -164,6 +176,7 @@ public class PlatPlayerInteractive : MonoBehaviour
     {
         animator.SetTrigger(AnimatorDash);
     }
+
 
     private void OnDisable()
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
@@ -82,6 +83,12 @@ public static class Util
     }
 
     public static Color InterpolateFade(bool goOn, Image imageFade, float fadeDifference = 0.01f)
+    {
+        return new Color(imageFade.color.r, imageFade.color.g, imageFade.color.b,
+            imageFade.color.a + (goOn ? fadeDifference : -fadeDifference));
+    }
+
+    public static Color InterpolateFade(bool goOn, TextMeshProUGUI imageFade, float fadeDifference = 0.01f)
     {
         return new Color(imageFade.color.r, imageFade.color.g, imageFade.color.b,
             imageFade.color.a + (goOn ? fadeDifference : -fadeDifference));

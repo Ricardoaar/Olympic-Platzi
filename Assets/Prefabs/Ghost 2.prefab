@@ -49,12 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canDead: 0
   ghostAnimator: {fileID: 1586298622292768714}
+  ownSprite: {fileID: 1811505558140377122}
+  ghostCollider: {fileID: 1811505558026196593}
+  ghostSpawnSystem: {fileID: 0}
   velocity: 3
   minWaitTime: 1
   maxWaitTime: 5
   offsetPlayer: {x: -0.1, y: 0}
-  ownSprite: {fileID: 1811505558140377122}
-  ghostCollider: {fileID: 1811505558026196593}
 --- !u!95 &1586298622292768714
 Animator:
   serializedVersion: 3
@@ -252,7 +253,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -278,7 +279,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 0
   m_Size: {x: 0.24, y: 0.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0

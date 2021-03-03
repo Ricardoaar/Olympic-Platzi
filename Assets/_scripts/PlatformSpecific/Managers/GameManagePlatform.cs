@@ -7,12 +7,12 @@ public class GameManagePlatform : MonoBehaviour
     public static Action OnReloadGame;
 
     [SerializeField] private GameObject player;
-    private Vector3 _initialPosition;
+    [SerializeField] private Transform initialPosition;
     private Coroutine _cReloadScene;
 
-    private void Awake()
+    private void Start()
     {
-        _initialPosition = player.transform.position;
+        OnReloadGame.Invoke();
     }
 
     private void OnEnable()
@@ -35,9 +35,8 @@ public class GameManagePlatform : MonoBehaviour
     private IEnumerator ReloadScene()
     {
         yield return new WaitUntil(() => VFXSceneSys.FadeFinished);
-
-        player.transform.position = _initialPosition;
-        yield return new WaitForSeconds(1.0f);
+        player.transform.position = initialPosition.position;
+        yield return new WaitForSeconds(3.5f);
         OnReloadGame.Invoke();
         VFXSceneSys.FadeFinished = false;
         _cReloadScene = null;
