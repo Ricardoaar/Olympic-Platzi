@@ -1069,6 +1069,18 @@ MonoBehaviour:
   m_IsMultiAtlasTexturesEnabled: 0
   m_UsedGlyphRects:
   - m_X: 0
+    m_Y: 34
+    m_Width: 65
+    m_Height: 69
+  - m_X: 65
+    m_Y: 34
+    m_Width: 61
+    m_Height: 68
+  - m_X: 204
+    m_Y: 0
+    m_Width: 61
+    m_Height: 68
+  - m_X: 265
     m_Y: 0
     m_Width: 75
     m_Height: 34
