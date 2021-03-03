@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/_scripts/TopdownSpecifics/TDPlayer/TDInputs.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_scripts/TDSpecifics/TDPlayer/TDInputs.inputactions'
 
 using System;
 using System.Collections;
