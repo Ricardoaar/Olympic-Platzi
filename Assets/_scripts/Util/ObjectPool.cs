@@ -41,8 +41,6 @@ public class ObjectPool : MonoBehaviour
         }
 
         var obj = _objects.Dequeue();
-        obj.transform.parent = transform;
-
         return obj;
     }
 
@@ -63,7 +61,6 @@ public class ObjectPool : MonoBehaviour
     /// <param name="gameObj"></param>
     public void EnqueueObj(GameObject gameObj)
     {
-        gameObj.transform.SetParent(transform);
         _objects.Enqueue(gameObj);
     }
 }

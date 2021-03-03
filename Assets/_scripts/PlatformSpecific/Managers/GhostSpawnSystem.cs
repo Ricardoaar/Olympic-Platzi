@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GhostSpawnSystem : MonoBehaviour
+public class GhostSpawnSystem : ExtraAction
 {
     [SerializeField] private ObjectPool ghostPool;
     [SerializeField] private BoxCollider2D limitLeft, limitRight;
@@ -32,6 +32,11 @@ public class GhostSpawnSystem : MonoBehaviour
 
     private void Awake()
     {
+        //   _canCreateGhost = false;
+        _currentTime = -2;
+        _currentEnemiesInScene = 0;
+        _timeBetweenGhost = 2;
+        _canCreateGhost = false;
         Instance = Instance == null ? this : Instance;
     }
 
@@ -75,14 +80,21 @@ public class GhostSpawnSystem : MonoBehaviour
 
     private void ActivateGhost(int quantity)
     {
+        if (_currentEnemiesInScene + quantity > maxEnemiesInScene)
+        {
+            quantity = maxEnemiesInScene - _currentEnemiesInScene;
+        }
+
+        _currentEnemiesInScene += quantity;
+
         for (int i = 0; i < quantity; i++)
         {
             var currentGhost = ghostPool.ExtractFromQueue();
             currentGhost.transform.position = GetRandomPos(Random.Range(0, 1.0f) > 0.5f);
             currentGhost.SetActive(true);
-            _currentEnemiesInScene += 1;
         }
     }
+
 
     public void OnGhostDisable(GameObject ghost)
     {
@@ -91,6 +103,13 @@ public class GhostSpawnSystem : MonoBehaviour
             _currentEnemiesInScene -= 1;
         }
 
+        ghost.transform.SetParent(transform);
+        ghost.gameObject.SetActive(false);
         ghostPool.EnqueueObj(ghost);
+    }
+
+    public override void DoAction()
+    {
+        CanCreateGhost();
     }
 }

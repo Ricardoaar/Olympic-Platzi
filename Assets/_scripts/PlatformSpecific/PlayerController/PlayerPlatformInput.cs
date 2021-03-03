@@ -197,7 +197,7 @@ public class PlayerPlatformInput : MonoBehaviour
     }
 
     public static bool CanDash;
-    public static Action OnDash;
+    public static System.Action OnDash;
 
     // private IEnumerator ReloadDash()
     // {

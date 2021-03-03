@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Experimental.U2D.Animation;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class PlatPlayerInteractive : MonoBehaviour
 {
@@ -36,13 +38,12 @@ public class PlatPlayerInteractive : MonoBehaviour
         Destroy(partSys, 3);
     }
 
-    private bool _inStone = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("TextStone") && !_inStone)
+        if (other.gameObject.layer == LayerMask.NameToLayer("TextStone"))
         {
-            _inStone = true;
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
             OnStoneEnter.Invoke();
         }
 
@@ -61,6 +62,7 @@ public class PlatPlayerInteractive : MonoBehaviour
 
     public static Action OnStoneEnter;
 
+    public static Action OnKillEnemy;
 
     private void CollisionWithGhost(Collider2D ghost, out bool killEnemy)
     {
@@ -72,11 +74,14 @@ public class PlatPlayerInteractive : MonoBehaviour
                                                    transform.position.x + 0.2f > ghost.transform.position.x:
                 ghostType.Die();
                 killEnemy = true;
+                OnKillEnemy.Invoke();
+
                 return;
             case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity &&
                                                     transform.position.x - 0.2f < ghost.transform.position.x:
                 ghostType.Die();
                 killEnemy = true;
+                OnKillEnemy.Invoke();
                 return;
         }
     }
