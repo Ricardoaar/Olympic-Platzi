@@ -20,12 +20,11 @@ public class RunnerManager : MonoBehaviour
     private bool _inputListener = false;
     private GameObject _currentObstacle;
     private bool _recoveryVelocity;
-    private bool _killInputSprite;
 
     [SerializeField] private GameObject _PlayerRunnerController;
     [SerializeField] private GlobalFloat _gameVelocity;
-    [SerializeField] private float _initGameVelocity;
 
+    private Difficulty _currentDifficulty;
 
     #region Subject Implementation
 
@@ -54,13 +53,18 @@ public class RunnerManager : MonoBehaviour
 
     private void Awake()
     {
+        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
         _activeInputObservers = new List<IActiveInputObserver>();
-        _gameVelocity.vFloat = _initGameVelocity;
+
     }
 
     private void Start()
     {
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
+
+        _timeForInput = _currentDifficulty.initTimeForInput;
+        _gameVelocity.vFloat = _currentDifficulty.targetGameVelocity;
+
     }
 
     // Update is called once per frame
@@ -128,22 +132,31 @@ public class RunnerManager : MonoBehaviour
 
     private IEnumerator SlowMotion(float minLevel)
     {
-        float div = _initGameVelocity / minLevel;
+        float div = _currentDifficulty.targetGameVelocity / minLevel;
         Debug.Log("Init Slow");
 
         _recoveryVelocity = false;
-        for (int i = 0; i < 100; i++)
+        while (_gameVelocity.vFloat > _currentDifficulty.targetGameVelocity / div)
         {
-            if(_gameVelocity.vFloat > _initGameVelocity / div)
-            {
-                _gameVelocity.vFloat -= 0.005f;
-            }
+            _gameVelocity.vFloat -= 0.005f;
             if (_recoveryVelocity && !_hurt)
             {
                 break;
             }
             yield return new WaitForSeconds(0.005f);
         }
+        //for (int i = 0; i < 100; i++)
+        //{
+        //    if(_gameVelocity.vFloat > _currentDifficulty.targetGameVelocity / div)
+        //    {
+        //        _gameVelocity.vFloat -= 0.005f;
+        //    }
+        //    if (_recoveryVelocity && !_hurt)
+        //    {
+        //        break;
+        //    }
+        //    yield return new WaitForSeconds(0.005f);
+        //}
         if (_hurt)
         {
             yield return new WaitForSeconds(1.5f);
@@ -156,15 +169,22 @@ public class RunnerManager : MonoBehaviour
         }
         Debug.Log("Recovery");
 
-        for (int i = 0; i < 100; i++)
+        while (_gameVelocity.vFloat < _currentDifficulty.targetGameVelocity)
         {
-            if (_gameVelocity.vFloat < _initGameVelocity)
-            {
-                _gameVelocity.vFloat += 0.005f;
-            }
-
+            _gameVelocity.vFloat += 0.005f;
             yield return new WaitForSeconds(0.002f);
+
         }
+
+        //for (int i = 0; i < 100; i++)
+        //{
+        //    if (_gameVelocity.vFloat < _currentDifficulty.targetGameVelocity)
+        //    {
+        //        _gameVelocity.vFloat += 0.005f;
+        //    }
+
+        //    yield return new WaitForSeconds(0.002f);
+        //}
 
     }
 

@@ -7,21 +7,27 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> _obstacles;
     [SerializeField] private float creationRate;
     [SerializeField] private GameObject parentForObstacles;
+    //TODO random range
     [SerializeField] private float _obstaclesSpeed;
+    [SerializeField] private float _minObstaclesSpeed;
+    [SerializeField] private float _maxObstaclesSpeed;
     [SerializeField] private float _limitForYPosition;
+    private Difficulty _currentDifficulty;
 
-    private void Start()
+    private void Awake()
     {
-        //Asignar variables segun el scriptable object 
-
-
-        StartCoroutine(GenerateObstacle());
+        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
 
     }
 
-    private void Update()
+    private void Start()
     {
-        //Definir escalabilidad de la dificultad aumentando el _obstacleSpeed
+        creationRate = _currentDifficulty.initObstacleCreationRate;
+        _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
+        _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
+
+        StartCoroutine(GenerateObstacle());
+
     }
 
     public void InitGeneration()
@@ -43,6 +49,8 @@ public class ObstacleGenerator : MonoBehaviour
     {
         GameObject prefab = _obstacles[Random.Range(0, _obstacles.Count)];
         Obstacle tmp = prefab.GetComponent<Obstacle>();
+
+        _obstaclesSpeed = Random.Range(_minObstaclesSpeed, _maxObstaclesSpeed);
 
         switch (tmp.GetObstacleType())
         {
@@ -71,5 +79,35 @@ public class ObstacleGenerator : MonoBehaviour
         instance.GetComponent<Obstacle>().SetSpeed(_obstaclesSpeed);
 
 
+    }
+
+    public void SetMinObstaclesSpeed(float sp)
+    {
+        _minObstaclesSpeed = sp;
+    }
+
+    public void SetMaxObstaclesSpeed(float sp)
+    {
+        _maxObstaclesSpeed = sp;
+    }
+
+    public void SetCreationRate(float sp)
+    {
+        creationRate = sp;
+    }
+
+    public float GetMinObstaclesSpeed()
+    {
+        return _minObstaclesSpeed;
+    }
+
+    public float GetMaxObstaclesSpeed()
+    {
+        return _maxObstaclesSpeed;
+    }
+
+    public float GetCreationRate()
+    {
+        return creationRate;
     }
 }

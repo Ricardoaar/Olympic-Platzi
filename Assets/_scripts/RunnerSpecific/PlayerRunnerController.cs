@@ -31,21 +31,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
 
     public void Notify(Obstacle obstacle)
     {
-        switch (obstacle.GetObstacleType())
-        {
-            case ObstacleType.Jump:
-                _animator.SetTrigger("Jump");
-                _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y * _forceNormalizer;
-                _rb.AddRelativeForce(transform.up * _forceToJump, ForceMode2D.Impulse);
-                break;
-            case ObstacleType.Duck:
-
-                _animator.SetTrigger("Duck");
-
-                break;
-            default:
-                break;
-        }
+        StartCoroutine(ActionPlayer(obstacle));
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,4 +51,32 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
 
     }
 
+    private IEnumerator ActionPlayer(Obstacle obstacle)
+    {
+        while (true)
+        {
+            if (Vector3.Distance(transform.position, obstacle.transform.position) < 2f)
+            {
+                switch (obstacle.GetObstacleType())
+                {
+                    case ObstacleType.Jump:
+
+                        _animator.SetTrigger("Jump");
+                        _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y * _forceNormalizer;
+                        _rb.AddRelativeForce(transform.up * _forceToJump, ForceMode2D.Impulse);
+                        break;
+                    case ObstacleType.Duck:
+
+                        _animator.SetTrigger("Duck");
+
+                        break;
+                    default:
+                        break;
+                }
+                yield break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
 }
