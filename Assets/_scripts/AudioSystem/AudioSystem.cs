@@ -7,10 +7,13 @@ public class AudioSystem : MonoBehaviour
 
     [SerializeField, Tooltip("AudioSource para la música de fondo")]
     private AudioSource _bgm;
+
     [SerializeField, Tooltip("AudioSource para los efectos de sonidos")]
     private AudioSource _sfx;
+
     [SerializeField, Tooltip("AudioSource para los efectos de sonidos en loop")]
     private AudioSource _sfxLoop;
+
     [SerializeField, Tooltip("Main AudioMixer")]
     private AudioMixer _mixer;
 
@@ -32,6 +35,11 @@ public class AudioSystem : MonoBehaviour
     {
         _bgm.clip = clip;
         _bgm.Play();
+    }
+
+    public void StopBGM()
+    {
+        _bgm.Stop();
     }
 
     /// <summary>

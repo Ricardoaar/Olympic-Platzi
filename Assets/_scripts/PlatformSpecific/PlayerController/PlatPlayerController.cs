@@ -9,7 +9,6 @@ using UnityEngine.InputSystem.Utilities;
 public class @PlatPlayerController : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-
     public @PlatPlayerController()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -39,6 +38,14 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                     ""name"": ""CancelAction"",
                     ""type"": ""Button"",
                     ""id"": ""22bd1fe9-73b5-48a7-822a-0f0558911109"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shirnk"",
+                    ""type"": ""Button"",
+                    ""id"": ""64042c8b-2135-4d94-9f61-08b1f560bf72"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -165,17 +172,57 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                     ""action"": ""CancelAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""328ede58-71e9-4665-a0ba-e92472294366"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e20f4639-f66a-49fd-b2e2-11e7ad4d7f14"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shirnk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""GeneralScheme"",
+            ""bindingGroup"": ""GeneralScheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
         m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
         m_Main_CancelAction = m_Main.FindAction("CancelAction", throwIfNotFound: true);
+        m_Main_Shirnk = m_Main.FindAction("Shirnk", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,42 +275,20 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Jump;
     private readonly InputAction m_Main_CancelAction;
-
+    private readonly InputAction m_Main_Shirnk;
     public struct MainActions
     {
         private @PlatPlayerController m_Wrapper;
-
-        public MainActions(@PlatPlayerController wrapper)
-        {
-            m_Wrapper = wrapper;
-        }
-
+        public MainActions(@PlatPlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Jump => m_Wrapper.m_Main_Jump;
         public InputAction @CancelAction => m_Wrapper.m_Main_CancelAction;
-
-        public InputActionMap Get()
-        {
-            return m_Wrapper.m_Main;
-        }
-
-        public void Enable()
-        {
-            Get().Enable();
-        }
-
-        public void Disable()
-        {
-            Get().Disable();
-        }
-
+        public InputAction @Shirnk => m_Wrapper.m_Main_Shirnk;
+        public InputActionMap Get() { return m_Wrapper.m_Main; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-
-        public static implicit operator InputActionMap(MainActions set)
-        {
-            return set.Get();
-        }
-
+        public static implicit operator InputActionMap(MainActions set) { return set.Get(); }
         public void SetCallbacks(IMainActions instance)
         {
             if (m_Wrapper.m_MainActionsCallbackInterface != null)
@@ -277,8 +302,10 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                 @CancelAction.started -= m_Wrapper.m_MainActionsCallbackInterface.OnCancelAction;
                 @CancelAction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnCancelAction;
                 @CancelAction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnCancelAction;
+                @Shirnk.started -= m_Wrapper.m_MainActionsCallbackInterface.OnShirnk;
+                @Shirnk.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnShirnk;
+                @Shirnk.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnShirnk;
             }
-
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
             {
@@ -291,16 +318,27 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
                 @CancelAction.started += instance.OnCancelAction;
                 @CancelAction.performed += instance.OnCancelAction;
                 @CancelAction.canceled += instance.OnCancelAction;
+                @Shirnk.started += instance.OnShirnk;
+                @Shirnk.performed += instance.OnShirnk;
+                @Shirnk.canceled += instance.OnShirnk;
             }
         }
     }
-
     public MainActions @Main => new MainActions(this);
-
+    private int m_GeneralSchemeSchemeIndex = -1;
+    public InputControlScheme GeneralSchemeScheme
+    {
+        get
+        {
+            if (m_GeneralSchemeSchemeIndex == -1) m_GeneralSchemeSchemeIndex = asset.FindControlSchemeIndex("GeneralScheme");
+            return asset.controlSchemes[m_GeneralSchemeSchemeIndex];
+        }
+    }
     public interface IMainActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCancelAction(InputAction.CallbackContext context);
+        void OnShirnk(InputAction.CallbackContext context);
     }
 }

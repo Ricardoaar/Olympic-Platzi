@@ -17,8 +17,8 @@ TagManager:
   - Ground
   - Ladder
   - NoCollision
-  - 
-  - 
+  - DamagePlayer
+  - TextStone
   - 
   - 
   - 
@@ -45,6 +45,12 @@ TagManager:
   - name: Background
     uniqueID: 3453859641
     locked: 0
+  - name: Enemies
+    uniqueID: 3837078225
+    locked: 0
   - name: Player
     uniqueID: 3327114493
+    locked: 0
+  - name: NoLight
+    uniqueID: 2800288783
     locked: 0
