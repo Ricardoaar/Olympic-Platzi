@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class TDPlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _dieClip;
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rigidBody;
     [SerializeField] private PlayerInput _input;
@@ -68,6 +70,7 @@ public class TDPlayerController : MonoBehaviour
     {
         _input.currentActionMap.Disable();
         _animator.SetTrigger("Die");
+        AudioSystem.SI.PlaySFX(_dieClip);
     }
 
     public void Reset()
@@ -80,9 +83,7 @@ public class TDPlayerController : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         transform.position = position;
-        _camera.transform.position = new Vector3(
-            position.x, _camera.transform.position.y, -10
-        );
+        _camera.transform.position = new Vector3(position.x, _camera.transform.position.y, -10);
     }
 
     public void SetCheckPoint(Vector3 position) => _checkPoint = position;

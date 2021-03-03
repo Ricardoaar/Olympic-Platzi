@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.33
+  _dieClip: {fileID: 8300000, guid: e3b64bf91e6d49f408193d1668ae1699, type: 3}
   _rigidBody: {fileID: 325038563586881242}
   _input: {fileID: 325038563586881246}
   _animator: {fileID: 162529570063692521}
