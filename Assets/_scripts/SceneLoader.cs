@@ -7,4 +7,9 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(sceneNum);
     }
+
+    public static void LoadSceneStatic(int sceneNum)
+    {
+        SceneManager.LoadScene(sceneNum);
+    }
 }
