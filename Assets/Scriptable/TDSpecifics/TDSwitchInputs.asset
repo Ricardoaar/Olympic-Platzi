@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
-  m_Name: TDTeleportEnglish
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: TDSwitchInputs
   m_EditorClassIdentifier: 
-  textLanguage: 1
-  text: Life can take you down unexpected paths, but don't forget your goal.
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: ad233f40cd1e2cb4d9c96e7b64f8a8e5, type: 2}
+  - {fileID: 11400000, guid: 190f3096d8369ca4f977b6486da68193, type: 2}
