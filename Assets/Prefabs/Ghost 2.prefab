@@ -52,10 +52,10 @@ MonoBehaviour:
   ownSprite: {fileID: 1811505558140377122}
   ghostCollider: {fileID: 1811505558026196593}
   ghostSpawnSystem: {fileID: 0}
-  velocity: 3
+  velocity: 4
   minWaitTime: 1
-  maxWaitTime: 5
-  offsetPlayer: {x: -0.1, y: 0}
+  maxWaitTime: 3
+  offsetPlayer: {x: 1, y: -1}
 --- !u!95 &1586298622292768714
 Animator:
   serializedVersion: 3

@@ -61,14 +61,14 @@ public class PlayerPlatformInput : MonoBehaviour
         ControllerAssign();
     }
 
-    private void OnReloadGame()
+    private void ReactivateComponents()
     {
         playerRb.bodyType = RigidbodyType2D.Dynamic;
         _controller.Enable();
     }
 
 
-    private void OnDamage()
+    private void DeactivateComponents()
     {
         playerRb.bodyType = RigidbodyType2D.Static;
         _controller.Disable();
@@ -119,15 +119,17 @@ public class PlayerPlatformInput : MonoBehaviour
     private void OnEnable()
     {
         CanDash = true;
-        GameManagePlatform.OnReloadGame += OnReloadGame;
-        PlatPlayerInteractive.OnDamage += OnDamage;
+        GameManagePlatform.OnReloadGame += ReactivateComponents;
+        PlatPlayerInteractive.OnDamage += DeactivateComponents;
         _controller.Enable();
+        GameManagePlatform.OnWinScene += DeactivateComponents;
     }
 
     private void OnDisable()
     {
-        GameManagePlatform.OnReloadGame -= OnReloadGame;
-        PlatPlayerInteractive.OnDamage -= OnDamage;
+        GameManagePlatform.OnWinScene -= DeactivateComponents;
+        GameManagePlatform.OnReloadGame -= ReactivateComponents;
+        PlatPlayerInteractive.OnDamage -= DeactivateComponents;
         _controller.Disable();
     }
 
@@ -167,7 +169,7 @@ public class PlayerPlatformInput : MonoBehaviour
     private IEnumerator MakeShrink(bool pressed)
     {
         var targetScale =
-            pressed ? new Vector3(0.4f, 0.4f, 1.0f) : new Vector3(1.0f, 1.1f, 1.1f);
+            pressed ? new Vector3(0.4f, 0.4f, 1.0f) : new Vector3(1.1f, 1.1f, 1.1f);
 
         while (Math.Abs(transform.localScale.x - targetScale.x) > 0.1f)
         {
@@ -197,7 +199,7 @@ public class PlayerPlatformInput : MonoBehaviour
     }
 
     public static bool CanDash;
-    public static Action OnDash;
+    public static System.Action OnDash;
 
     // private IEnumerator ReloadDash()
     // {

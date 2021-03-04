@@ -2,7 +2,7 @@
 
 public class SoundEvents : MonoBehaviour
 {
-    [SerializeField] private AudioClip playerJumpClip, gameOverClip, lvlSfxLoop;
+    [SerializeField] private AudioClip playerJumpClip, gameOverClip, lvlSfxLoop, ghostDie;
 
     private void PlayGameOver()
     {
@@ -10,23 +10,34 @@ public class SoundEvents : MonoBehaviour
         AudioSystem.SI.StopBGM();
     }
 
+    private void PlayGhostDie()
+    {
+        AudioSystem.SI.PlaySFX(ghostDie);
+    }
+
     private void PlayJump()
     {
         AudioSystem.SI.PlaySFX(playerJumpClip);
     }
 
+
+    private void Start()
+    {
+        OnReloadGame();
+    }
+
     private void OnEnable()
     {
         PlatPlayerInteractive.OnDamage += PlayGameOver;
+        PlatPlayerInteractive.OnKillEnemy += PlayGhostDie;
         PlayerPlatformInput.OnPlayerJump += PlayJump;
         GameManagePlatform.OnReloadGame += OnReloadGame;
     }
 
-    
-    
     private void OnDisable()
     {
         PlatPlayerInteractive.OnDamage -= PlayGameOver;
+        PlatPlayerInteractive.OnKillEnemy -= PlayGhostDie;
         PlayerPlatformInput.OnPlayerJump -= PlayJump;
         GameManagePlatform.OnReloadGame -= OnReloadGame;
     }

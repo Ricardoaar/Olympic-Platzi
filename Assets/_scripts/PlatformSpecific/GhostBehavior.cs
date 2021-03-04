@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -75,19 +74,22 @@ public class GhostBehavior : DieOnAnimationFinishComponent
         transform.SetParent(null);
         var currentCount = 0.0f;
         //State 1
-        while (Math.Abs(transform.position.x - _player.transform.position.x) > 0.1f &&
-               Math.Abs(transform.position.y - _player.transform.position.y) > 0.05f)
+        while (Math.Abs(transform.position.x - _player.transform.position.x) > offsetPlayer.x - 0.1f ||
+               Math.Abs(transform.position.y - _player.transform.position.y) > Mathf.Abs(offsetPlayer.y) - 0.1f)
         {
             transform.position =
                 Vector3.MoveTowards(transform.position,
                     _player.transform.position + offset,
                     velocity * Time.deltaTime);
-
+            if (goRight && transform.position.x > _player.transform.position.x ||
+                !goRight && transform.position.x < _player.transform.position.x)
+            {
+                break;
+            }
 
             ChangeRotation(_player.transform.position);
 
-
-            if (currentCount > 1.0f)
+            if (currentCount > 2.0f)
             {
                 velocity += 1;
                 currentCount = 0;
@@ -127,53 +129,51 @@ public class GhostBehavior : DieOnAnimationFinishComponent
             yield return new WaitForEndOfFrame();
         }
 
-        gameObject.SetActive(false);
+        StartCoroutine(DieCoroutine());
     }
 
     private IEnumerator DieCoroutine()
     {
+        ghostCollider.enabled = false;
         ghostAnimator.SetBool(AnimatorIsAlive, false);
+        var randomPos
+            = GhostSpawnSystem.Instance.GetRandomPos(_player.transform.position.x > transform.position.x);
         while (!canDead)
         {
             transform.position =
-                Vector3.MoveTowards(transform.position,
-                    new Vector3(
-                        GhostSpawnSystem.Instance.GetRandomPos(_player.transform.position.x > transform.position.x).x,
-                        -10)
-                    ,
-                    velocity * Time.deltaTime);
+                Vector3.MoveTowards(transform.position, new Vector3(randomPos.x, -5f), velocity * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
-        gameObject.SetActive(false);
+        OnDamagePlayer();
     }
 
     public void Die()
     {
-        ghostCollider.enabled = false;
         StopAllCoroutines();
         StartCoroutine(DieCoroutine());
     }
+
 
     private void OnEnable()
     {
         SetValues();
         StopAllCoroutines();
         StartCoroutine(PrepareAttack());
-        PlatPlayerInteractive.OnDamage += DisableGhost;
-        PlatPlayerInteractive.OnStoneEnter += DisableGhost;
-    }
-
-    private void DisableGhost()
-    {
-        gameObject.SetActive(false);
+        PlatPlayerInteractive.OnDamage += Die;
+        PlatPlayerInteractive.OnDamage += OnDamagePlayer;
+        GameManagePlatform.OnWinScene += Die;
     }
 
     private void OnDisable()
     {
-        PlatPlayerInteractive.OnDamage -= DisableGhost;
-        PlatPlayerInteractive.OnStoneEnter -= DisableGhost;
+        PlatPlayerInteractive.OnDamage -= Die;
+        PlatPlayerInteractive.OnDamage -= OnDamagePlayer;
+        GameManagePlatform.OnWinScene -= Die;
+    }
 
+    private void OnDamagePlayer()
+    {
         ghostSpawnSystem.OnGhostDisable(gameObject);
     }
 

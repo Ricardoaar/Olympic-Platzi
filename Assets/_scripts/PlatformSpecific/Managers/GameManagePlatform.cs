@@ -5,19 +5,22 @@ using UnityEngine;
 public class GameManagePlatform : MonoBehaviour
 {
     public static Action OnReloadGame;
+    public static Action OnWinScene;
 
     [SerializeField] private GameObject player;
     [SerializeField] private Transform initialPosition;
     private Coroutine _cReloadScene;
-
-    private void Start()
-    {
-        OnReloadGame.Invoke();
-    }
+    [SerializeField] private GameObject timeLineSceneChange;
 
     private void OnEnable()
     {
+        OnWinScene += OnWinSceneManager;
         PlatPlayerInteractive.OnDamage += OnPlayerDamage;
+    }
+
+    private void OnWinSceneManager()
+    {
+        timeLineSceneChange.SetActive(true);
     }
 
     private void OnDisable()

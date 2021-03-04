@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FirstCinematic.unity
+    guid: 341d3063a30f2584798f909ae293dae9
+  - enabled: 1
+    path: Assets/Scenes/Run/PlatformPrototype.unity
+    guid: 944d980d3684a5b4fa674c68159b0543
+  - enabled: 1
+    path: Assets/Scenes/cHristian/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Kyplim/Topdown-lv-3.unity
+    guid: 9d51c70484230ae41ae1ef78a0efa52e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 791eed894c0aa4841bbd6015318a47da,
       type: 2}

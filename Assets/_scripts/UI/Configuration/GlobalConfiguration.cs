@@ -3,7 +3,8 @@
 public enum Language
 {
     Spanish,
-    English
+    English,
+    Chems
 }
 
 public enum TextSize

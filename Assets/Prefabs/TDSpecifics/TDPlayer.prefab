@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.33
+  _dieClip: {fileID: 8300000, guid: e3b64bf91e6d49f408193d1668ae1699, type: 3}
   _rigidBody: {fileID: 325038563586881242}
   _input: {fileID: 325038563586881246}
   _animator: {fileID: 162529570063692521}
+  _camera: {fileID: 0}
 --- !u!114 &550850263704851696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +237,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0060842037, y: -0.08517885}
-  m_Size: {x: 0.48284292, y: 0.83572674}
+  m_Offset: {x: 0.0060842037, y: -0.16579616}
+  m_Size: {x: 0.48284292, y: 0.6744921}
   m_Direction: 0
 --- !u!82 &7719130439337098553
 AudioSource:
