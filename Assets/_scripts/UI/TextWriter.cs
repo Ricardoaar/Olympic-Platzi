@@ -29,7 +29,7 @@ public class TextWriter : MonoBehaviour
     public void WriteText(List<TextScriptable> texts, float duration = 0)
     {
         TextScriptable currentLanguageText =
-            texts.FirstOrDefault(txt => txt.textLanguage == GlobalConfiguration.GlobalLanguage);
+            texts.FirstOrDefault(txt => txt.textLanguage == GlobalSettings.GlobalLanguage);
 
         if (textContainer.gameObject.activeSelf) return;
         textContainer.gameObject.SetActive(true);

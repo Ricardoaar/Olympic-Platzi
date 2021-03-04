@@ -24,7 +24,7 @@ public class RunnerManager : MonoBehaviour
     [SerializeField] private GameObject _PlayerRunnerController;
     [SerializeField] private GlobalFloat _gameVelocity;
 
-    private Difficulty _currentDifficulty;
+    private DifficultyScriptable _currentDifficultyScriptable;
 
     #region Subject Implementation
 
@@ -53,7 +53,7 @@ public class RunnerManager : MonoBehaviour
 
     private void Awake()
     {
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficultyScriptable = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficultyScriptable;
         _activeInputObservers = new List<IActiveInputObserver>();
 
     }
@@ -62,8 +62,8 @@ public class RunnerManager : MonoBehaviour
     {
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
 
-        _timeForInput = _currentDifficulty.initTimeForInput;
-        _gameVelocity.vFloat = _currentDifficulty.targetGameVelocity;
+        _timeForInput = _currentDifficultyScriptable.initTimeForInput;
+        _gameVelocity.vFloat = _currentDifficultyScriptable.targetGameVelocity;
 
     }
 
@@ -132,11 +132,11 @@ public class RunnerManager : MonoBehaviour
 
     private IEnumerator SlowMotion(float minLevel)
     {
-        float div = _currentDifficulty.targetGameVelocity / minLevel;
+        float div = _currentDifficultyScriptable.targetGameVelocity / minLevel;
         Debug.Log("Init Slow");
 
         _recoveryVelocity = false;
-        while (_gameVelocity.vFloat > _currentDifficulty.targetGameVelocity / div)
+        while (_gameVelocity.vFloat > _currentDifficultyScriptable.targetGameVelocity / div)
         {
             _gameVelocity.vFloat -= 0.005f;
             if (_recoveryVelocity && !_hurt)
@@ -169,7 +169,7 @@ public class RunnerManager : MonoBehaviour
         }
         Debug.Log("Recovery");
 
-        while (_gameVelocity.vFloat < _currentDifficulty.targetGameVelocity)
+        while (_gameVelocity.vFloat < _currentDifficultyScriptable.targetGameVelocity)
         {
             _gameVelocity.vFloat += 0.005f;
             yield return new WaitForSeconds(0.002f);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace _scripts.UI.Language
@@ -9,8 +10,20 @@ namespace _scripts.UI.Language
     {
         [SerializeField] private List<TextScriptable> textInDifferentLanguages;
 
-        public TextScriptable MainText =>
-            textInDifferentLanguages.FirstOrDefault(text =>
-                text.textLanguage == GlobalConfiguration.GlobalLanguage);
+        public TextScriptable MainText
+        {
+            get
+            {
+                foreach (var text in textInDifferentLanguages)
+                {
+                    if (text.textLanguage == GlobalSettings.GlobalLanguage)
+                    {
+                        return text;
+                    }
+                }
+
+                return null;
+            }
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CurrentDifficulty : MonoBehaviour
 {
-    public Difficulty currentDifficulty;
+    [FormerlySerializedAs("currentDifficulty")] public DifficultyScriptable currentDifficultyScriptable;
     
 }

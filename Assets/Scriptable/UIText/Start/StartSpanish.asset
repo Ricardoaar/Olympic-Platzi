@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
-  m_Name: Tip_Uncertainly
+  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
+  m_Name: StartSpanish
   m_EditorClassIdentifier: 
-  textInDifferentLanguages:
-  - {fileID: 11400000, guid: 2e528dc1e8a7a5748a6842586857b22c, type: 2}
-  - {fileID: 11400000, guid: 1be675ed541850e4da8c891d6ca7ef07, type: 2}
+  textLanguage: 0
+  text: Jugar

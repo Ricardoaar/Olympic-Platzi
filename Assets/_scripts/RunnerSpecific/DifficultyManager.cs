@@ -13,11 +13,11 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float _valueForInputTime;
     [SerializeField] private float _valueForGameVelocity;
 
-    private Difficulty _currentDifficulty;
+    private DifficultyScriptable _currentDifficultyScriptable;
 
     private void Awake()
     {
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficultyScriptable = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficultyScriptable;
         obsGenerator = FindObjectOfType<ObstacleGenerator>();
         //runnerManager= FindObjectOfType<RunnerManager>();
     }
@@ -40,7 +40,7 @@ public class DifficultyManager : MonoBehaviour
 
         DecreaseTimeForInput();
 
-        _currentDifficulty.targetGameVelocity = _currentDifficulty.targetGameVelocity + _valueForGameVelocity;
+        _currentDifficultyScriptable.targetGameVelocity = _currentDifficultyScriptable.targetGameVelocity + _valueForGameVelocity;
 
     }
 

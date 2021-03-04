@@ -12,19 +12,19 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _minObstaclesSpeed;
     [SerializeField] private float _maxObstaclesSpeed;
     [SerializeField] private float _limitForYPosition;
-    private Difficulty _currentDifficulty;
+    private DifficultyScriptable _currentDifficultyScriptable;
 
     private void Awake()
     {
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficultyScriptable = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficultyScriptable;
 
     }
 
     private void Start()
     {
-        creationRate = _currentDifficulty.initObstacleCreationRate;
-        _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
-        _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
+        creationRate = _currentDifficultyScriptable.initObstacleCreationRate;
+        _minObstaclesSpeed = _currentDifficultyScriptable.minObstacleVel;
+        _maxObstaclesSpeed = _currentDifficultyScriptable.maxObstacleVel;
 
         StartCoroutine(GenerateObstacle());
 
