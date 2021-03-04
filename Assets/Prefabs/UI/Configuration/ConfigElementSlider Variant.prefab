@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b2ae7b158a4174e93781e0af1cb79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configParameter: 
+  configParameter: 
   _slider: {fileID: 9102102176888139499}
 --- !u!114 &9102102176888139499
 MonoBehaviour:
@@ -409,6 +409,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ChildAlignment
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745799717046314590, guid: 5d7ef1359ffdb7347974300cf886703c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745799717046314590, guid: 5d7ef1359ffdb7347974300cf886703c,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3745799717046314591, guid: 5d7ef1359ffdb7347974300cf886703c,
         type: 3}
