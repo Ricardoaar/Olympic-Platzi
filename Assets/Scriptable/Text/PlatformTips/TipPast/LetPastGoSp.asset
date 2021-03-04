@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
   m_Name: LetPastGoSp
   m_EditorClassIdentifier: 
-  textLanguage: 0
-  text: Sometimes the past won't let you move on, LET IT GO!
+  textLanguage: 1
+  text: Sometimes past won't let you move on... let it go!

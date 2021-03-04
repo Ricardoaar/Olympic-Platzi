@@ -55,6 +55,7 @@ public class GhostSpawnSystem : ExtraAction
     {
         GameManagePlatform.OnReloadGame += RestartGhostSpawner;
         PlatPlayerInteractive.OnDamage += CanCreateGhost;
+        GameManagePlatform.OnWinScene += CanCreateGhost;
     }
 
     private void CanCreateGhost()
@@ -66,6 +67,7 @@ public class GhostSpawnSystem : ExtraAction
     {
         GameManagePlatform.OnReloadGame -= RestartGhostSpawner;
         PlatPlayerInteractive.OnDamage -= CanCreateGhost;
+        GameManagePlatform.OnWinScene -= CanCreateGhost;
     }
 
 
@@ -110,6 +112,6 @@ public class GhostSpawnSystem : ExtraAction
 
     public override void DoAction()
     {
-        CanCreateGhost();
+        _canCreateGhost = true;
     }
 }

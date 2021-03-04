@@ -41,6 +41,12 @@ public class PlatPlayerInteractive : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("FinalScene"))
+        {
+            GameManagePlatform.OnWinScene.Invoke();
+            
+        }
+
         if (other.gameObject.layer == LayerMask.NameToLayer("TextStone"))
         {
             other.gameObject.GetComponent<Collider2D>().enabled = false;
@@ -63,6 +69,7 @@ public class PlatPlayerInteractive : MonoBehaviour
     public static Action OnStoneEnter;
 
     public static Action OnKillEnemy;
+
 
     private void CollisionWithGhost(Collider2D ghost, out bool killEnemy)
     {
