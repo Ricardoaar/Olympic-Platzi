@@ -18,4 +18,5 @@ MonoBehaviour:
   initObstacleCreationRate: 6
   minObstacleVel: 4
   maxObstacleVel: 5
-  counterOfDodgeClear: 1
+  counterOfDodgeClear: 3
+  limitForButtons: 3

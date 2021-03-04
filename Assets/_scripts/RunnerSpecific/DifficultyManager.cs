@@ -14,6 +14,7 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float _valueForGameVelocity;
 
     private Difficulty _currentDifficulty;
+    private int _phasesCount = 0;
 
     private void Awake()
     {
@@ -22,15 +23,15 @@ public class DifficultyManager : MonoBehaviour
         //runnerManager= FindObjectOfType<RunnerManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Start()
     {
-        if (Time.realtimeSinceStartup / 15 >= 0.9996f && Time.realtimeSinceStartup / 15 <= 1f)
+        for (int i = 0; i < 15; i++)
         {
-            Debug.Log("IncreaseDifficulty");
-            IncreaseDifficulty();
+            yield return new WaitForSeconds(1f);
         }
-
+        Debug.Log("IncreaseDifficulty");
+        IncreaseDifficulty();
+        StartCoroutine(Start());
     }
 
     private void IncreaseDifficulty()
@@ -42,7 +43,11 @@ public class DifficultyManager : MonoBehaviour
         DecreaseTimeForInput();
 
         _currentDifficulty.targetGameVelocity = _currentDifficulty.targetGameVelocity + _valueForGameVelocity;
-
+        _phasesCount++;
+        if(_phasesCount == 10)
+        {
+            _currentDifficulty.limitForButtons++;
+        }
     }
 
     private void DecreaseTimeForInput()

@@ -13,5 +13,6 @@ public class Difficulty : ScriptableObject
     public float minObstacleVel;
     public float maxObstacleVel;
     public int counterOfDodgeClear;
+    public int limitForButtons;
     #endregion
 }

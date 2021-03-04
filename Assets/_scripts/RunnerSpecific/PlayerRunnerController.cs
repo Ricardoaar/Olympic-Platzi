@@ -46,6 +46,7 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
             _enemy.GetComponent<Rigidbody2D>()
             .AddRelativeForce(_enemy.transform.right * -1 * _forceForDamage, ForceMode2D.Force);
 
+            _currentDifficulty.targetGameVelocity += 0.1f;
             //Debug.Log("ForceToEnemy");
         }
     }
@@ -75,23 +76,26 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     public void Hurt()
     {
         _rb.AddRelativeForce(transform.right * -1 * _forceForDamage, ForceMode2D.Force);
-        //Debug.Log("HURT");
+        Debug.Log("HURT");
 
         _counterOfDodgeClear = 0;
+        _currentDifficulty.targetGameVelocity -= 0.06f;
+
     }
 
     private IEnumerator ActionPlayer(Obstacle obstacle)
     {
         while (true)
         {
-            if (Vector3.Distance(transform.position, obstacle.transform.position) < 2f)
+            if (obstacle && Vector3.Distance(transform.position, obstacle.transform.position) < 2f)
             {
                 switch (obstacle.GetObstacleType())
                 {
-                    case ObstacleType.Jump:
+                    case var tmp when (tmp == ObstacleType.JumpBox || tmp == ObstacleType.JumpGhost):
 
                         _animator.SetTrigger("Jump");
-                        _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y * _forceNormalizer;
+                        _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y 
+                                        + Mathf.Abs(obstacle.GetMinYPosition()) * _forceNormalizer;
                         _rb.AddRelativeForce(transform.up * _forceToJump, ForceMode2D.Impulse);
                         break;
                     case ObstacleType.Duck:
