@@ -30,6 +30,7 @@ public class DifficultyManager : MonoBehaviour
             Debug.Log("IncreaseDifficulty");
             IncreaseDifficulty();
         }
+
     }
 
     private void IncreaseDifficulty()
@@ -46,9 +47,15 @@ public class DifficultyManager : MonoBehaviour
 
     private void DecreaseTimeForInput()
     {
-        transform.position = new Vector3(transform.position.x - _valueForInputTime,
-                                            transform.position.y,
-                                            transform.position.z);
+        //transform.position = new Vector3(transform.position.x - _valueForInputTime,
+        //                                    transform.position.y,
+        //                                    transform.position.z);
+
+        GetComponent<Collider2D>().offset = new Vector2(
+                                        GetComponent<Collider2D>().offset.x - _valueForInputTime, 
+                                        GetComponent<Collider2D>().offset.y);
+
     }
+
 
 }

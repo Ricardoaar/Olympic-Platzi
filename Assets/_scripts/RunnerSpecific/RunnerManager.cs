@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider2D))]
@@ -25,11 +26,13 @@ public class RunnerManager : MonoBehaviour
     [SerializeField] private GlobalFloat _gameVelocity;
 
     private Difficulty _currentDifficulty;
+    private bool _hurt;
+    [SerializeField] private UnityEvent OnWin;
 
     #region Subject Implementation
 
     private List<IActiveInputObserver> _activeInputObservers;
-    private bool _hurt;
+    
 
     public void AddObserver(IActiveInputObserver observer)
     {
@@ -63,8 +66,8 @@ public class RunnerManager : MonoBehaviour
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
 
         _timeForInput = _currentDifficulty.initTimeForInput;
-        _gameVelocity.vFloat = _currentDifficulty.targetGameVelocity;
-
+        _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
+        _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
     }
 
     // Update is called once per frame
@@ -82,6 +85,12 @@ public class RunnerManager : MonoBehaviour
         {
             _currentObstacle = collision.gameObject;
             StartCoroutine(LifeCycleOfInput());
+        }else if (collision.CompareTag("Enemy"))
+        {
+            if (OnWin != null)
+                OnWin.Invoke();
+
+            Debug.Log("HAS GANADO");
         }
     }
 
@@ -133,7 +142,6 @@ public class RunnerManager : MonoBehaviour
     private IEnumerator SlowMotion(float minLevel)
     {
         float div = _currentDifficulty.targetGameVelocity / minLevel;
-        Debug.Log("Init Slow");
 
         _recoveryVelocity = false;
         while (_gameVelocity.vFloat > _currentDifficulty.targetGameVelocity / div)
@@ -167,7 +175,6 @@ public class RunnerManager : MonoBehaviour
             yield return new WaitUntil(() => _recoveryVelocity);
 
         }
-        Debug.Log("Recovery");
 
         while (_gameVelocity.vFloat < _currentDifficulty.targetGameVelocity)
         {

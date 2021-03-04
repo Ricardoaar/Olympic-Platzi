@@ -12,13 +12,25 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     private float _forceToJump;
     [SerializeField] private float _forceForDamage;
     [SerializeField] private float _forceNormalizer;
+    [SerializeField] private GameObject _enemy;
 
     [SerializeField] private UnityEvent HurtPlayer;
+    [SerializeField] private UnityEvent OnPlayerDied;
+    private Difficulty _currentDifficulty;
+
+    private int _counterOfDodgeClear;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+
+    }
+
+    private void Start()
+    {
+        _counterOfDodgeClear = 0;
     }
 
     // Update is called once per frame
@@ -27,28 +39,45 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
         _animator.SetFloat("GlobalVelocity", _gameVelocity.vFloat + .1f);
         _animator.SetFloat("MoveY", transform.position.y);
 
+
+        if(_counterOfDodgeClear >= _currentDifficulty.counterOfDodgeClear)
+        {
+            _counterOfDodgeClear = 0;
+            _enemy.GetComponent<Rigidbody2D>()
+            .AddRelativeForce(_enemy.transform.right * -1 * _forceForDamage, ForceMode2D.Force);
+
+            //Debug.Log("ForceToEnemy");
+        }
     }
 
     public void Notify(Obstacle obstacle)
     {
         StartCoroutine(ActionPlayer(obstacle));
-        
+        _counterOfDodgeClear++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstacle"))
         {
-            HurtPlayer.Invoke();
-            Debug.Log("HURT");
+            if(HurtPlayer != null)
+                HurtPlayer.Invoke();
+        }
+        else if(collision.CompareTag("Enemy"))
+        {
+            if(OnPlayerDied != null)
+                OnPlayerDied.Invoke();
+
+            Debug.Log("player died");
         }
     }
 
     public void Hurt()
     {
         _rb.AddRelativeForce(transform.right * -1 * _forceForDamage, ForceMode2D.Force);
-        
+        //Debug.Log("HURT");
 
+        _counterOfDodgeClear = 0;
     }
 
     private IEnumerator ActionPlayer(Obstacle obstacle)
