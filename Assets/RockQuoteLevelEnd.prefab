@@ -80,7 +80,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8198767300391860027
@@ -123,5 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceText: {fileID: 8300000, guid: df5ed2ee2981e7c4fa92a35b89309051, type: 3}
   text: {fileID: 11400000, guid: 6ff1aec2f9cd80c4e9a1608995dd2e0e, type: 2}
-  actionsOnTrigger:
-  - {fileID: 0}
+  actionsOnTrigger: []

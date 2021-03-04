@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class VFXSceneSys : MonoBehaviour
@@ -35,7 +36,6 @@ public class VFXSceneSys : MonoBehaviour
     // ReSharper disable once RedundantDefaultMemberInitializer
     public static bool FadeFinished = false;
 
-
     private IEnumerator Fading()
     {
         FadeFinished = false;
@@ -56,5 +56,20 @@ public class VFXSceneSys : MonoBehaviour
 
         FadeFinished = false;
         _cFade = null;
+    }
+
+    private void Awake()
+    {
+        StartCoroutine(SingleFaedUp());
+    }
+
+    private IEnumerator SingleFaedUp()
+    {
+        fadeImg.color = Color.black;
+        while (fadeImg.color.a > 0)
+        {
+            fadeImg.color = Util.InterpolateFade(false, fadeImg);
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 }

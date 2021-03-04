@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _scripts.UI.Language;
@@ -53,12 +54,13 @@ public class TextWriter : MonoBehaviour
 
         textContainer.color = new Color(textContainer.color.r, textContainer.color.g, textContainer.color.b, 0);
 
-        foreach (var t in text)
+
+        for (var index = 0; index <= text.Length; index++)
         {
-            currentText = $"{currentText}{t}";
+            currentText = text.Substring(0, index);
             textContainer.color = Util.InterpolateFade(true, textContainer, 0.1f);
             textContainer.text = currentText;
-            yield return new WaitForSeconds(secondsDuration * 0.6f);
+            yield return new WaitForSeconds(secondsDuration);
         }
 
 
@@ -67,7 +69,6 @@ public class TextWriter : MonoBehaviour
             textContainer.color = Util.InterpolateFade(false, textContainer, 0.05f);
             yield return new WaitForEndOfFrame();
         }
-
 
         textContainer.gameObject.SetActive(false);
     }
