@@ -16,9 +16,12 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
 
     [SerializeField] private UnityEvent HurtPlayer;
     [SerializeField] private UnityEvent OnPlayerDied;
+    private bool _inputListener = false;
+
     private Difficulty _currentDifficulty;
 
     private int _counterOfDodgeClear;
+    private float _multiplierDistanceForAction = 3f;
 
     private void Awake()
     {
@@ -38,7 +41,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     {
         _animator.SetFloat("GlobalVelocity", _gameVelocity.vFloat + .1f);
         _animator.SetFloat("MoveY", transform.position.y);
-
+        _enemy.GetComponent<Animator>().SetFloat("GlobalVelocity",
+            _gameVelocity.vFloat + Mathf.Abs(1f - _currentDifficulty.initGameVelocity));
 
         if(_counterOfDodgeClear >= _currentDifficulty.counterOfDodgeClear)
         {
@@ -46,9 +50,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
             _enemy.GetComponent<Rigidbody2D>()
             .AddRelativeForce(_enemy.transform.right * -1 * _forceForDamage, ForceMode2D.Force);
 
-            _currentDifficulty.targetGameVelocity += 0.1f;
-            //Debug.Log("ForceToEnemy");
         }
+        
     }
 
     public void Notify(Obstacle obstacle)
@@ -87,7 +90,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     {
         while (true)
         {
-            if (obstacle && Vector3.Distance(transform.position, obstacle.transform.position) < 2f)
+            if (Vector3.Distance(transform.position, obstacle.transform.position) 
+                < _currentDifficulty.targetGameVelocity * _multiplierDistanceForAction)
             {
                 switch (obstacle.GetObstacleType())
                 {
@@ -108,8 +112,17 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
                 }
                 yield break;
             }
-            yield return new WaitForEndOfFrame();
+
+            
+                yield return new WaitForEndOfFrame();
         }
+
+    }
+
+
+    public void SetInputListener()
+    {
+        _inputListener = !_inputListener;
 
     }
 }

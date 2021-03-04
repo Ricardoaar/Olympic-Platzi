@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
@@ -42,7 +41,7 @@ public class DifficultyManager : MonoBehaviour
 
         DecreaseTimeForInput();
 
-        _currentDifficulty.targetGameVelocity = _currentDifficulty.targetGameVelocity + _valueForGameVelocity;
+        _currentDifficulty.targetGameVelocity += _valueForGameVelocity;
         _phasesCount++;
         if(_phasesCount == 10)
         {

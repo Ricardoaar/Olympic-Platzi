@@ -474,12 +474,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe973c6369235048be5ddd19538fc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeForInput: 5
   _PlayerRunnerController: {fileID: 5167397217348458535}
   _gameVelocity: {fileID: 11400000, guid: f458433aa075f5f40b62d72ff04d06fe, type: 2}
   OnWin:
     m_PersistentCalls:
       m_Calls: []
+  OnInputListener:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5167397217348458538}
+        m_MethodName: SetInputListener
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _player: {fileID: 5167397217348458535}
   _buttonsContainer: {fileID: 92218764}
   _buttonsPrefabs:
   - {fileID: 5947167114776178904, guid: a46f9fc8baa7f754396ff1ce3721f835, type: 3}
@@ -524,9 +538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c30cd7686808b140b4d8592d6f85249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _valueForObsCreationRate: 0.5
-  _valueForObsMinVel: 0.2
-  _valueForObsMaxVel: 0.2
+  _valueForObsCreationRate: 0.3
+  _valueForObsMinVel: 0.1
+  _valueForObsMaxVel: 0.1
   _valueForInputTime: 0.15
   _valueForGameVelocity: 0.05
 --- !u!61 &578783211
@@ -1232,7 +1246,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -457889071
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 6371883505267911148, guid: a783c845a7e9120488c8a6e569c8b7f8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1253,7 +1267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971383045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.2, y: -2.37, z: 0}
+  m_LocalPosition: {x: -4.2, y: -2.68, z: 0}
   m_LocalScale: {x: 4.038796, y: 4.038796, z: 4.038796}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1319,7 +1333,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13730599, y: 0.468214}
+  m_Offset: {x: 0.13730599, y: 0.51152915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1330,7 +1344,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18942031, y: 1.7798967}
+  m_Size: {x: 0.18942031, y: 1.6932665}
   m_EdgeRadius: 0
 --- !u!1 &2001210622
 GameObject:
@@ -1968,6 +1982,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3803312221309235516, guid: 0c9f53bc470fd274ea30626ed7d3adae,
+        type: 3}
+      propertyPath: initialBackgroundVelocity
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6281596473821982752, guid: 0c9f53bc470fd274ea30626ed7d3adae,
         type: 3}
       propertyPath: m_RootOrder
@@ -2850,7 +2869,18 @@ MonoBehaviour:
         m_CallState: 2
   OnPlayerDied:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 578783208}
+        m_MethodName: ResetParameters
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5167397218617928992
 GameObject:
   m_ObjectHideFlags: 0

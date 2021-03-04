@@ -1,27 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(Collider2D))]
 public class RunnerManager : MonoBehaviour
 {
-    private KeyCode[] keyCodesKeyboard = {
-            KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F
-    };
-
-    //private KeyCode[] keyCodesGamePad = {
-    //        KeyCode.
-    //};
-
-    [SerializeField] private float _timeForInput;
-
     private bool _inputListener = false;
     private GameObject _currentObstacle;
-    private bool _recoveryVelocity;
 
     [SerializeField] private GameObject _PlayerRunnerController;
     [SerializeField] private GlobalFloat _gameVelocity;
@@ -29,6 +15,7 @@ public class RunnerManager : MonoBehaviour
     private Difficulty _currentDifficulty;
     private bool _hurt;
     [SerializeField] private UnityEvent OnWin;
+    [SerializeField] private UnityEvent OnInputListener;
 
     private bool _buttonA_Fizq;
     private bool _buttonS_Tizq;
@@ -38,6 +25,8 @@ public class RunnerManager : MonoBehaviour
     private List<Button> buttons = new List<Button>();
     private int currentButtonsCount = 0;
 
+    [SerializeField] private GameObject _player;
+    private float _multiplierDistanceForDestroyInput = 1.66f;
 
     #region Subject Implementation
 
@@ -66,7 +55,6 @@ public class RunnerManager : MonoBehaviour
 
     private InputActionRunner _input;
 
-    //TODO
     private int _limitForButtons;
     [SerializeField] private GameObject _buttonsContainer;
     [SerializeField] List<GameObject> _buttonsPrefabs;
@@ -109,7 +97,7 @@ public class RunnerManager : MonoBehaviour
     {
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
 
-        _timeForInput = _currentDifficulty.initTimeForInput;
+        //_timeForInput = _currentDifficulty.initTimeForInput;
         _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
         _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
         _limitForButtons = _currentDifficulty.limitForButtons;
@@ -122,6 +110,7 @@ public class RunnerManager : MonoBehaviour
         if (_inputListener)
         {
             CheckInput();
+            CheckDistanceObstaclePlayer();
         }
     }
 
@@ -131,6 +120,9 @@ public class RunnerManager : MonoBehaviour
         {
             _currentObstacle = collision.gameObject;
             StartCoroutine(LifeCycleOfInput());
+
+            if (OnInputListener != null)
+                OnInputListener.Invoke();
         }else if (collision.CompareTag("Enemy"))
         {
             if (OnWin != null)
@@ -138,15 +130,6 @@ public class RunnerManager : MonoBehaviour
 
             Debug.Log("HAS GANADO");
         }
-    }
-
-    private IEnumerator Timer()
-    {
-        for (int i = 0; i < _timeForInput; i++)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-        _inputListener = false;
     }
 
     private IEnumerator LifeCycleOfInput()
@@ -158,11 +141,7 @@ public class RunnerManager : MonoBehaviour
 
         StartSlowMotion(.2f);
 
-        StartCoroutine(Timer());
-
         yield return new WaitUntil(() => !_inputListener);
-
-        _recoveryVelocity = true;
 
         //TODO finish animation 
         foreach (Transform item in _buttonsContainer.GetComponentInChildren<Transform>())
@@ -191,17 +170,8 @@ public class RunnerManager : MonoBehaviour
         if (_buttonPressedcount == currentButtonsCount)
         {
             NotifyObservers(_currentObstacle.GetComponent<Obstacle>());
-            _inputListener = false;
-            StopCoroutine(Timer());
-            _buttonPressedcount = 0;
+            ResetParameters();
         }
-
-        //var gamepadButtonPressed = Gamepad.current.allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic);
-        //if ((Keyboard.current.anyKey.isPressed || gamepadButtonPressed) && _buttonPressedcount == 0)
-        //{
-        //    Debug.Log("prueba");
-        //}
-
     }
 
     private void ResetButtonsPressed()
@@ -222,45 +192,33 @@ public class RunnerManager : MonoBehaviour
     {
         float div = _currentDifficulty.targetGameVelocity / minLevel;
 
-        _recoveryVelocity = false;
         while (_gameVelocity.vFloat > _currentDifficulty.targetGameVelocity / div)
         {
             _gameVelocity.vFloat -= 0.005f;
-            if (_recoveryVelocity && !_hurt)
+            if ((!_inputListener && !_hurt) || _hurt)
             {
                 break;
             }
             yield return new WaitForSeconds(0.005f);
         }
-        
+        yield return new WaitUntil(() => !_inputListener);
         if (_hurt)
         {
-            yield return new WaitForSeconds(1.5f);
             _hurt = false;
-        }
-        else
-        {
-            yield return new WaitUntil(() => _recoveryVelocity);
-
         }
 
         while (_gameVelocity.vFloat < _currentDifficulty.targetGameVelocity)
         {
             _gameVelocity.vFloat += 0.005f;
-            yield return new WaitForSeconds(0.002f);
-
+            yield return new WaitForEndOfFrame();
         }
     }
 
     public void HurtPlayer()
     {
-        StopCoroutine(Timer());
         _hurt = true;
-        _inputListener = false;
-        //StartSlowMotion(.35f, true);
+        ResetParameters();
     }
-
-
 
     private void GenerateRandomButtons()
     {
@@ -287,4 +245,21 @@ public class RunnerManager : MonoBehaviour
 
     }
 
+    public void ResetParameters()
+    {
+        _inputListener = false;
+        _buttonPressedcount = 0;
+        ResetButtonsPressed();
+        if (OnInputListener != null)
+            OnInputListener.Invoke();
+    }
+
+    private void CheckDistanceObstaclePlayer()
+    {
+        if (Vector3.Distance(_player.transform.position, _currentObstacle.transform.position)
+            <= _currentDifficulty.targetGameVelocity * _multiplierDistanceForDestroyInput)
+        {
+            ResetParameters();
+        }
+    }
 }
