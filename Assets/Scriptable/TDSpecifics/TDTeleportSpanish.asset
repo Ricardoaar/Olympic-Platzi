@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b7ba29350f24ae6a9d8e4368dc34793, type: 3}
-  m_Name: Custom
+  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
+  m_Name: TDTeleportSpanish
   m_EditorClassIdentifier: 
-  categoryName: 
-  textSize: 0
-  language: 1
+  textLanguage: 0
+  text: La vida puede levarte por senderos inesperados...
