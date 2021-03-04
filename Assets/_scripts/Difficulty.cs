@@ -7,10 +7,11 @@ public class Difficulty : ScriptableObject
 
     [Header("Runner")]
     public float targetGameVelocity;
-    public float initTimeForInput;
+    public float initGameVelocity;
     public float initObstacleCreationRate;
     public float minObstacleVel;
     public float maxObstacleVel;
-
+    public int counterOfDodgeClear;
+    public int limitForButtons;
     #endregion
 }

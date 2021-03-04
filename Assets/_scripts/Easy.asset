@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   targetGameVelocity: 0.6
+  initGameVelocity: 0.6
   initTimeForInput: 5
   initObstacleCreationRate: 6
   minObstacleVel: 4
   maxObstacleVel: 5
+  counterOfDodgeClear: 3
+  limitForButtons: 3
