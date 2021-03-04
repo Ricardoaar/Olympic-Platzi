@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b7ba29350f24ae6a9d8e4368dc34793, type: 3}
-  m_Name: Custom
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: TDTeleport
   m_EditorClassIdentifier: 
-  categoryName: 
-  textSize: 0
-  language: 1
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: 9e3ff2a7505151548ac1e9db35d9e179, type: 2}
+  - {fileID: 11400000, guid: 19c4303201fbe6a46985e609b169de4b, type: 2}
