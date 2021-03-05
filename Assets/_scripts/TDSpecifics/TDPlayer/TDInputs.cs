@@ -25,6 +25,14 @@ public class @TDInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""131981e9-5ad6-486c-93fe-74f00bc2fdf6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -247,6 +255,28 @@ public class @TDInputs : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""782dd3f2-cf77-4b5d-adb2-7dc644e8ada1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc25d981-6099-4493-88c5-c2ff03186987"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -259,6 +289,14 @@ public class @TDInputs : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""71bee5f6-dfc2-4ca0-b6b3-9c59e7ccbb3a"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""53a54c34-690c-45de-9285-37372f703dff"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -483,6 +521,28 @@ public class @TDInputs : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04927410-3590-4451-b0aa-8bc80f65f125"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3472b5f4-06b3-4c34-8567-6728a02c05f5"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -515,9 +575,11 @@ public class @TDInputs : IInputActionCollection, IDisposable
         // PlayerNormal
         m_PlayerNormal = asset.FindActionMap("PlayerNormal", throwIfNotFound: true);
         m_PlayerNormal_Move = m_PlayerNormal.FindAction("Move", throwIfNotFound: true);
+        m_PlayerNormal_Pause = m_PlayerNormal.FindAction("Pause", throwIfNotFound: true);
         // PlayerInvented
         m_PlayerInvented = asset.FindActionMap("PlayerInvented", throwIfNotFound: true);
         m_PlayerInvented_Move = m_PlayerInvented.FindAction("Move", throwIfNotFound: true);
+        m_PlayerInvented_Pause = m_PlayerInvented.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -568,11 +630,13 @@ public class @TDInputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_PlayerNormal;
     private IPlayerNormalActions m_PlayerNormalActionsCallbackInterface;
     private readonly InputAction m_PlayerNormal_Move;
+    private readonly InputAction m_PlayerNormal_Pause;
     public struct PlayerNormalActions
     {
         private @TDInputs m_Wrapper;
         public PlayerNormalActions(@TDInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerNormal_Move;
+        public InputAction @Pause => m_Wrapper.m_PlayerNormal_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerNormal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -585,6 +649,9 @@ public class @TDInputs : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnMove;
+                @Pause.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerNormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -592,6 +659,9 @@ public class @TDInputs : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -601,11 +671,13 @@ public class @TDInputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_PlayerInvented;
     private IPlayerInventedActions m_PlayerInventedActionsCallbackInterface;
     private readonly InputAction m_PlayerInvented_Move;
+    private readonly InputAction m_PlayerInvented_Pause;
     public struct PlayerInventedActions
     {
         private @TDInputs m_Wrapper;
         public PlayerInventedActions(@TDInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerInvented_Move;
+        public InputAction @Pause => m_Wrapper.m_PlayerInvented_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInvented; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -618,6 +690,9 @@ public class @TDInputs : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnMove;
+                @Pause.started -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerInventedActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerInventedActionsCallbackInterface = instance;
             if (instance != null)
@@ -625,6 +700,9 @@ public class @TDInputs : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -650,9 +728,11 @@ public class @TDInputs : IInputActionCollection, IDisposable
     public interface IPlayerNormalActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPlayerInventedActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86d617c65ab13d46a856f640322f784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.33
+  _speed: 0.32
   _dieClip: {fileID: 8300000, guid: e3b64bf91e6d49f408193d1668ae1699, type: 3}
   _rigidBody: {fileID: 325038563586881242}
   _input: {fileID: 325038563586881246}
@@ -197,7 +197,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 11
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: c6fd2a5f3a656bb49b219b10f8657bb9, type: 2}
