@@ -15,7 +15,7 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _limitForDuckYPosition;
     private Difficulty _currentDifficulty;
 
-    private bool _generateObstacles = true;
+    [SerializeField] private bool _generateObstacles = true;
 
     [SerializeField] private GlobalFloat _gameVelocity;
 
@@ -27,14 +27,20 @@ public class ObstacleGenerator : MonoBehaviour
     private void Start()
     {
         _currentDifficulty = GlobalSettings.CurrentDifficult;
+
+    }
+
+    public void InitGame()
+    {
         creationRate = _currentDifficulty.initObstacleCreationRate;
         _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
         _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
-
     }
 
     public void InitGeneration()
     {
+        StopAllCoroutines();
+        _generateObstacles = true;
         StartCoroutine(GenerateObstacle());
     }
 

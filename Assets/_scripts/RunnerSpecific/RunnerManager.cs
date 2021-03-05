@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class RunnerManager : MonoBehaviour
 {
     private bool _inputListener = false;
@@ -69,6 +69,11 @@ public class RunnerManager : MonoBehaviour
 
     [SerializeField] private AudioClip _bgClip;
 
+    [SerializeField] private PlayerInput _playerInput;
+
+    [SerializeField] private Transform _initPlayerPosition;
+    private string _currentControlScheme;
+
     private void OnEnable()
     {
         _input.Enable();
@@ -94,13 +99,11 @@ public class RunnerManager : MonoBehaviour
         _input.F_B.Button4.performed += (ctx) => _buttonF_B = true;
         _input.F_B.Button4.canceled += (ctx) => _buttonF_B = false;
 
+        _playerInput = _player.GetComponent<PlayerInput>();
 
-        //Tres fases performed, darle click
-        //no me la se
-        //canceled dejar de presionar
         _currentDifficulty = GlobalSettings.CurrentDifficult;
         _activeInputObservers = new List<IActiveInputObserver>();
-
+        
     }
 
     private void Start()
@@ -113,15 +116,29 @@ public class RunnerManager : MonoBehaviour
 
     public void InitGame()
     {
+        obsGenerator.InitGame();
         obsGenerator.InitGeneration();
         foreach (var item in parallaxBackground)
         {
             item.SetInitGame();
         }
+
         _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
         _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
     }
-
+    public void ResetScene()
+    {
+        StopAllCoroutines();
+        obsGenerator.OffGenerateObstacles();
+        DeleteObjects();
+        obsGenerator.InitGame();
+        obsGenerator.InitGeneration();
+        _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
+        _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
+        ResetParameters();
+        ResetPlayerPosition();
+        ResetManagerPosition();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -131,6 +148,74 @@ public class RunnerManager : MonoBehaviour
             CheckDistanceObstaclePlayer();
         }
 
+        _currentControlScheme = _playerInput.currentControlScheme;
+        Debug.Log(_currentControlScheme);
+
+        switch (_currentControlScheme)
+        {
+            case "Gamepad":
+
+                foreach (var item in buttons)
+                {
+                    item.ChangeSpriteToGamePad();
+
+                }
+                break;
+            case "Keyboard":
+
+                foreach (var item in buttons)
+                {
+                    item.ChangeSpriteToKeyboard();
+
+                }
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ResetPlayerPosition()
+    {
+        _player.transform.position = _initPlayerPosition.position;
+    }
+
+    private void ResetManagerPosition()
+    {
+        GetComponent<BoxCollider2D>().offset = new Vector2(0, 
+                                GetComponent<BoxCollider2D>().offset.y);
+    }
+
+    public void DeleteObjects()
+    {
+        List<Obstacle> obstacles = new List<Obstacle>();
+        obstacles.AddRange(GameObject.Find("Obstacles").GetComponentsInChildren<Obstacle>());
+
+        if(obstacles.Count > 0)
+        {
+            foreach (var item in obstacles)
+            {
+                Destroy(item.gameObject);
+            }
+        }
+
+        List<Button> buttons= new List<Button>();
+        buttons.AddRange(_buttonsContainer.GetComponentsInChildren<Button>());
+
+        if (buttons.Count > 0)
+        {
+            foreach (var item in buttons)
+            {
+                Destroy(item.gameObject);
+            }
+
+        }
+
+    }
+
+    public void StopCorroutines()
+    {
+        StopAllCoroutines();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -295,6 +380,6 @@ public class RunnerManager : MonoBehaviour
 
     public void PlayMusicBG()
     {
-        //AudioSystem.SI.PlayBGM(_bgClip);
+        AudioSystem.SI.PlayBGM(_bgClip);
     }
 }

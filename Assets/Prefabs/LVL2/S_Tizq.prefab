@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  _sprites:
+  - {fileID: 2792667131147269051, guid: 242bb6eee00b07545b35c7cf17746cf7, type: 3}
+  - {fileID: -6330979952734338035, guid: 242bb6eee00b07545b35c7cf17746cf7, type: 3}
 --- !u!95 &-5729609394393271750
 Animator:
   serializedVersion: 3
