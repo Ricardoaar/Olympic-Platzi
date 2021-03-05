@@ -64,6 +64,7 @@ public class TDPlayerController : MonoBehaviour
                 _input.SwitchCurrentActionMap("PlayerNormal");
                 break;
         }
+        _animator.SetTrigger("SwitchInputs");
     }
 
     public void Die()
