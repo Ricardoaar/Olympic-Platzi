@@ -15,7 +15,7 @@ public class DifficultyManager : MonoBehaviour
     public const float LIMIT_OBS_CREATION_RATE = 4f;
     public const float LIMIT_OBS_MIN_VEL = 5f;
     public const float LIMIT_OBS_MAX_VEL = 6f;
-    public const float LIMIT_INPUT_TIME = 2.8f;
+    public const float LIMIT_INPUT_TIME = -2.3f;
     public const float LIMIT_GAME_VELOCITY = 1.5F;
 
     private Difficulty _currentDifficulty;
@@ -75,17 +75,17 @@ public class DifficultyManager : MonoBehaviour
         }
 
 
-        if (GetComponent<Collider2D>().offset.x <= LIMIT_INPUT_TIME)
+        if (GetComponent<BoxCollider2D>().offset.x <= LIMIT_INPUT_TIME)
         {
-            GetComponent<Collider2D>().offset = new Vector2(
+            GetComponent<BoxCollider2D>().offset = new Vector2(
                                             LIMIT_INPUT_TIME,
-                                            GetComponent<Collider2D>().offset.y);
+                                            GetComponent<BoxCollider2D>().offset.y);
         }
         else
         {
             DecreaseTimeForInput();
         }
-        if(_currentDifficulty.targetGameVelocity >= LIMIT_GAME_VELOCITY)
+        if (_currentDifficulty.targetGameVelocity >= LIMIT_GAME_VELOCITY)
         {
             _currentDifficulty.targetGameVelocity = LIMIT_GAME_VELOCITY;
         }
@@ -108,8 +108,8 @@ public class DifficultyManager : MonoBehaviour
 
     private void DecreaseTimeForInput()
     {
-        GetComponent<Collider2D>().offset = new Vector2(
-                                        GetComponent<Collider2D>().offset.x - _valueForInputTime, 
-                                        GetComponent<Collider2D>().offset.y);
+        GetComponent<BoxCollider2D>().offset = new Vector2(
+                                        GetComponent<BoxCollider2D>().offset.x - _valueForInputTime, 
+                                        GetComponent<BoxCollider2D>().offset.y);
     }
 }

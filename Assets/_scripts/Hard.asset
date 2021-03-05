@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: 
   difficult: 1
-  targetGameVelocity: 854165
-  initTimeForInput: 5416
-  initObstacleCreationRate: 213
-  minObstacleVel: 231
-  maxObstacleVel: 2313
+  targetGameVelocity: 0.65
+  initGameVelocity: 0.7
+  initObstacleCreationRate: 5
+  minObstacleVel: 4
+  maxObstacleVel: 5
+  counterOfDodgeClear: 3
+  limitForButtons: 4
   maxGhostInScene: 7
   ghostVelocity: 4

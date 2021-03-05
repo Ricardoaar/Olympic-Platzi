@@ -30,33 +30,44 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ea4d7df0-d7aa-4a7c-9bac-afb0cc6c0c59"",
+                    ""id"": ""10eefd4d-bb68-406c-ae6a-a891a38ef6e1"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""main"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Button1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fcad31a1-3cc1-449d-acd2-e1ba8fff9260"",
+                    ""id"": ""6180fde2-bc07-4005-a833-3da7e807c156"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Button1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28c63c78-f9d3-441e-8243-33c8b2b5d707"",
                     ""path"": ""<XInputController>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""main"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5b55cae1-d82c-4b3a-b906-b91d82e5e682"",
+                    ""id"": ""07c3b055-927a-408d-b361-24030741b31c"",
                     ""path"": ""<DualShockGamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -79,33 +90,44 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""47c1b6a9-7c85-4811-ab4f-cf19dbde9d74"",
+                    ""id"": ""2a2e7c90-435a-4cf5-a62b-1741825c0edf"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Button2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""89fec3b6-e659-4533-b214-c850abe1ef99"",
+                    ""id"": ""709b10e5-a530-4f84-882a-99016f376bdb"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Button2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18781efa-fcf4-4aab-8790-680fa2a703b9"",
                     ""path"": ""<XInputController>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""579a450b-746e-476b-940d-7e57f6ecfcbc"",
+                    ""id"": ""8a2f356f-b0ed-446d-9230-65181bacb7a3"",
                     ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -132,29 +154,40 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Button3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f2b39a47-8bc3-4ba8-be63-7f4b70849f81"",
+                    ""id"": ""8c992f75-c533-444a-8d49-637b22027a49"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Button3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36c0524d-dfbe-497d-a177-f509904eb1bb"",
                     ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""74c5f3ea-6756-4f13-919f-ff62f60ff128"",
+                    ""id"": ""a0f723e8-2f41-4b7d-a24f-62f22e5e9754"",
                     ""path"": ""<DualShockGamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -181,29 +214,40 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Button4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""846dc950-6343-4c91-8294-9fc42cb2391e"",
+                    ""id"": ""2bad731d-0058-442d-beb2-df68d2291dc1"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Button4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""626800bd-ef99-4f50-b0ab-e4fb8d3c3977"",
                     ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""23661233-f70a-4c8c-b79f-22e754350674"",
+                    ""id"": ""093328ca-e685-414b-975d-5a924290a291"",
                     ""path"": ""<DualShockGamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Button4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -213,9 +257,26 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""main"",
-            ""bindingGroup"": ""main"",
-            ""devices"": []
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -408,13 +469,22 @@ public class @InputActionRunner : IInputActionCollection, IDisposable
         }
     }
     public F_BActions @F_B => new F_BActions(this);
-    private int m_mainSchemeIndex = -1;
-    public InputControlScheme mainScheme
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
     {
         get
         {
-            if (m_mainSchemeIndex == -1) m_mainSchemeIndex = asset.FindControlSchemeIndex("main");
-            return asset.controlSchemes[m_mainSchemeIndex];
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
     public interface IA_FizqActions
