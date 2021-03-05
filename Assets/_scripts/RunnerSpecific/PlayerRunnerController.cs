@@ -53,6 +53,7 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
 
         if(_counterOfDodgeClear >= _currentDifficulty.counterOfDodgeClear)
         {
+            Debug.Log("Entraaaa");
             _counterOfDodgeClear = 0;
             _enemy.GetComponent<Rigidbody2D>()
             .AddRelativeForce(_enemy.transform.right * -1 * _forceForDamage, ForceMode2D.Force);
