@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
-  m_Name: AudioSpanish
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: SettingComplez
   m_EditorClassIdentifier: 
-  textLanguage: 1
-  text: AUDIO
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: c47f8f4b3fa85ee4296d5261f9fd3e7d, type: 2}
+  - {fileID: 11400000, guid: bd4233818ad6e984e91318cdb9a77cf0, type: 2}
