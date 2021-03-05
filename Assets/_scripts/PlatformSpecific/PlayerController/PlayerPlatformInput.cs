@@ -108,10 +108,24 @@ public class PlayerPlatformInput : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Ladder")) return;
         _inLadder = false;
         ExitLadder();
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
+        {
+            NOQUEDATIEMPO.Invoke(false);
+        }
     }
+
+
+    public static UnityAction<bool> NOQUEDATIEMPO;
+
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
+        {
+            NOQUEDATIEMPO.Invoke(true);
+        }
+
         if (other.gameObject.layer != LayerMask.NameToLayer("Ladder")) return;
         _inLadder = true;
         _ladderCollider = other;
@@ -151,7 +165,7 @@ public class PlayerPlatformInput : MonoBehaviour
 
     public static UnityAction<bool> OnPause;
 
-    private void Pause()
+    public void Pause()
     {
         if (Time.timeScale == 0)
         {

@@ -288,22 +288,6 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""GeneralScheme"",
-            ""bindingGroup"": ""GeneralScheme"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Gamepad"",
             ""bindingGroup"": ""Gamepad"",
             ""devices"": [
@@ -435,15 +419,6 @@ public class @PlatPlayerController : IInputActionCollection, IDisposable
         }
     }
     public MainActions @Main => new MainActions(this);
-    private int m_GeneralSchemeSchemeIndex = -1;
-    public InputControlScheme GeneralSchemeScheme
-    {
-        get
-        {
-            if (m_GeneralSchemeSchemeIndex == -1) m_GeneralSchemeSchemeIndex = asset.FindControlSchemeIndex("GeneralScheme");
-            return asset.controlSchemes[m_GeneralSchemeSchemeIndex];
-        }
-    }
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {

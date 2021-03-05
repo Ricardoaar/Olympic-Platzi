@@ -275,22 +275,6 @@
     ],
     "controlSchemes": [
         {
-            "name": "GeneralScheme",
-            "bindingGroup": "GeneralScheme",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": true,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": true,
-                    "isOR": false
-                }
-            ]
-        },
-        {
             "name": "Gamepad",
             "bindingGroup": "Gamepad",
             "devices": [
