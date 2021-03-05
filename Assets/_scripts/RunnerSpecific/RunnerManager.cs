@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
 public class RunnerManager : MonoBehaviour
@@ -146,16 +147,14 @@ public class RunnerManager : MonoBehaviour
         //TODO finish animation 
         foreach (Transform item in _buttonsContainer.GetComponentInChildren<Transform>())
         {
-            Destroy(item.gameObject);
+            item.GetComponent<Animator>().SetTrigger("ActiveFadeOut");
         }
     }
 
     private void CheckInput()
     {
-        
         for (int i = 0; i < buttons.Count; i++)
         {
-
             if (buttons[i].type == ButtonType.A_Fizq && _buttonA_Fizq
             || buttons[i].type == ButtonType.D_Tder && _buttonD_Tder
             || buttons[i].type == ButtonType.S_Tizq && _buttonS_Tizq
@@ -163,6 +162,8 @@ public class RunnerManager : MonoBehaviour
             {
                 _buttonPressedcount++;
                 ResetButtonsPressed();
+                if(buttons[i])
+                    buttons[i].gameObject.GetComponent<Image>().color = Color.green;
                 buttons.Remove(buttons[i]);
             }
         }
@@ -249,6 +250,7 @@ public class RunnerManager : MonoBehaviour
     {
         _inputListener = false;
         _buttonPressedcount = 0;
+        buttons.Clear();
         ResetButtonsPressed();
         if (OnInputListener != null)
             OnInputListener.Invoke();

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3885195746366911957}
   - component: {fileID: 3885195746366911956}
   - component: {fileID: 3885195746366911955}
+  - component: {fileID: -6871741468166644075}
   m_Layer: 5
   m_Name: D_Tder
   m_TagString: Untagged
@@ -88,3 +89,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+--- !u!95 &-6871741468166644075
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885195746366911953}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9438a5c3c6b61d24695d747728c42af5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
