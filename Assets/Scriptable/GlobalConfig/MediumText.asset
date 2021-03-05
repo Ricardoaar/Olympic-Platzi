@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MediumText
   m_EditorClassIdentifier: 
   Category: 1
-  smallSize: 65
-  mediumSize: 80
-  bigSize: 100
+  smallSize: 35
+  mediumSize: 45
+  bigSize: 55

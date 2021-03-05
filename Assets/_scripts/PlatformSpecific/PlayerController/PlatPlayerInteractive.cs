@@ -76,13 +76,15 @@ public class PlatPlayerInteractive : MonoBehaviour
         killEnemy = false;
         switch (ghostType.GetGhostType)
         {
-            case GhostBehavior.GhostType.Dark when Math.Abs(root.transform.eulerAngles.y - 180) < 0.5f:
+            case GhostBehavior.GhostType.Dark when Math.Abs(root.transform.eulerAngles.y - 180) < 0.5f &&
+                                                   transform.position.x + 1.0f > ghost.transform.position.x:
                 ghostType.Die();
                 killEnemy = true;
                 OnKillEnemy.Invoke();
 
                 return;
-            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity:
+            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity &&
+                                                    transform.position.x - 1.0f < ghost.transform.position.x:
                 ghostType.Die();
                 killEnemy = true;
                 OnKillEnemy.Invoke();
