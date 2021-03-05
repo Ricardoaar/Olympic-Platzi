@@ -12,11 +12,11 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float _valueForInputTime;
     [SerializeField] private float _valueForGameVelocity;
 
-    public const float LIMIT_OBS_CREATION_RATE = 0;
-    //[SerializeField] private float _valueForObsMinVel;
-    //[SerializeField] private float _valueForObsMaxVel;
-    //[SerializeField] private float _valueForInputTime;
-    //[SerializeField] private float _valueForGameVelocity;
+    public const float LIMIT_OBS_CREATION_RATE = 4f;
+    public const float LIMIT_OBS_MIN_VEL = 5f;
+    public const float LIMIT_OBS_MAX_VEL = 6f;
+    public const float LIMIT_INPUT_TIME = 2.8f;
+    public const float LIMIT_GAME_VELOCITY = 1.5F;
 
     private Difficulty _currentDifficulty;
     private int _phasesCount = 0;
@@ -46,13 +46,54 @@ public class DifficultyManager : MonoBehaviour
 
     private void IncreaseDifficulty()
     {
-        obsGenerator.SetCreationRate(obsGenerator.GetCreationRate() - _valueForObsCreationRate);
-        obsGenerator.SetMaxObstaclesSpeed(obsGenerator.GetMaxObstaclesSpeed() + _valueForObsMaxVel);
-        obsGenerator.SetMinObstaclesSpeed(obsGenerator.GetMinObstaclesSpeed() + _valueForObsMinVel);
+        if(obsGenerator.GetCreationRate() <= LIMIT_OBS_CREATION_RATE)
+        {
+            obsGenerator.SetCreationRate(LIMIT_OBS_CREATION_RATE);
+        }
+        else
+        {
+            obsGenerator.SetCreationRate(obsGenerator.GetCreationRate() - _valueForObsCreationRate);
 
-        DecreaseTimeForInput();
+        }
 
-        _currentDifficulty.targetGameVelocity += _valueForGameVelocity;
+        if (obsGenerator.GetMaxObstaclesSpeed() >= LIMIT_OBS_MAX_VEL)
+        {
+            obsGenerator.SetMaxObstaclesSpeed(LIMIT_OBS_MAX_VEL);
+        }
+        else
+        {
+            obsGenerator.SetMaxObstaclesSpeed(obsGenerator.GetMaxObstaclesSpeed() + _valueForObsMaxVel);
+        }
+
+        if(obsGenerator.GetMinObstaclesSpeed() >= LIMIT_OBS_MIN_VEL)
+        {
+            obsGenerator.SetMinObstaclesSpeed(LIMIT_OBS_MIN_VEL);
+        }
+        else
+        {
+            obsGenerator.SetMinObstaclesSpeed(obsGenerator.GetMinObstaclesSpeed() + _valueForObsMinVel);
+        }
+
+
+        if (GetComponent<Collider2D>().offset.x <= LIMIT_INPUT_TIME)
+        {
+            GetComponent<Collider2D>().offset = new Vector2(
+                                            LIMIT_INPUT_TIME,
+                                            GetComponent<Collider2D>().offset.y);
+        }
+        else
+        {
+            DecreaseTimeForInput();
+        }
+        if(_currentDifficulty.targetGameVelocity >= LIMIT_GAME_VELOCITY)
+        {
+            _currentDifficulty.targetGameVelocity = LIMIT_GAME_VELOCITY;
+        }
+        else
+        {
+            _currentDifficulty.targetGameVelocity += _valueForGameVelocity;
+        }
+
         _phasesCount++;
         if(_phasesCount == 10)
         {
@@ -60,17 +101,15 @@ public class DifficultyManager : MonoBehaviour
         }
     }
 
-    private void DecreaseTimeForInput()
+    private void ResetToLimit()
     {
-        //transform.position = new Vector3(transform.position.x - _valueForInputTime,
-        //                                    transform.position.y,
-        //                                    transform.position.z);
-
-        GetComponent<Collider2D>().offset = new Vector2(
-                                        GetComponent<Collider2D>().offset.x - _valueForInputTime, 
-                                        GetComponent<Collider2D>().offset.y);
 
     }
 
-
+    private void DecreaseTimeForInput()
+    {
+        GetComponent<Collider2D>().offset = new Vector2(
+                                        GetComponent<Collider2D>().offset.x - _valueForInputTime, 
+                                        GetComponent<Collider2D>().offset.y);
+    }
 }

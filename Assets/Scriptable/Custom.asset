@@ -15,4 +15,4 @@ MonoBehaviour:
   categoryName: 
   txtSize: 0
   language: 1
-  Difficulty: {fileID: 0}
+  difficulty: {fileID: 11400000, guid: e779891ecbce92a46b47eb7e9bdf0161, type: 2}

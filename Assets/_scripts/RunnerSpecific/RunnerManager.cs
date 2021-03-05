@@ -295,6 +295,6 @@ public class RunnerManager : MonoBehaviour
 
     public void PlayMusicBG()
     {
-        AudioSystem.SI.PlayBGM(_bgClip);
+        //AudioSystem.SI.PlayBGM(_bgClip);
     }
 }

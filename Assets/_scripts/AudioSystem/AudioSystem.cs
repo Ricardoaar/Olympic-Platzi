@@ -48,6 +48,16 @@ public class AudioSystem : MonoBehaviour
     /// <param name="clip"></param>
     public void PlaySFX(AudioClip clip) => _sfx.PlayOneShot(clip);
 
+    public void SetSFXPitch(float vel)
+    {
+        _sfx.pitch = vel;
+    }
+
+    public bool GetSFXIsPlaying()
+    {
+        return _sfx.isPlaying;
+    }
+
     /// <summary>
     /// Play sound effect looped
     /// </summary>
