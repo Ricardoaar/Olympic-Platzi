@@ -437,7 +437,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -6.5847435, y: 0}
+  m_Offset: {x: -8.301896, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -448,7 +448,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 25.039467, y: 17.92}
+  m_Size: {x: 28.473772, y: 17.92}
   m_EdgeRadius: 0
 --- !u!114 &482055951
 MonoBehaviour:
@@ -609,7 +609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47452825, y: 0.065468885, z: -17.675396}
+  m_LocalPosition: {x: 0.4745283, y: 0.065468885, z: -17.675396}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2065198313}
@@ -760,9 +760,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacles:
   - {fileID: 4489882853241880604, guid: aa4dd16fc4d9c784182cefcf868d693b, type: 3}
-  - {fileID: 6809104526468580965, guid: eb1679fd5279ece469d31d9c4f342d4e, type: 3}
-  - {fileID: 751640472887954147, guid: 31c35c6d54c57654091667a66545022e, type: 3}
-  - {fileID: 751640472887954147, guid: 1e543db4cbbc72c429259f3682106cba, type: 3}
   creationRate: 6
   parentForObstacles: {fileID: 2001210622}
   _obstaclesSpeed: 4
@@ -2654,7 +2651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065198312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
