@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
@@ -126,6 +128,13 @@ public class RunnerManager : MonoBehaviour
             CheckInput();
             CheckDistanceObstaclePlayer();
         }
+
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            if (OnWin != null)
+                OnWin.Invoke();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -281,5 +290,10 @@ public class RunnerManager : MonoBehaviour
     public void PlayTextStone()
     {
         _textStone.PlayerTrigger();
+    }
+
+    public void NextScene()
+    {
+        SceneManager.LoadSceneAsync(4);
     }
 }

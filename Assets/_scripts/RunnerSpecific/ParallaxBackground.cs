@@ -16,7 +16,7 @@ public class ParallaxBackground : MonoBehaviour
 
     [SerializeField] private GlobalFloat _gameVelocity;
 
-    private bool _initGame = false;
+    [SerializeField] private bool _initGame = false;
 
     private void Awake()
     {
