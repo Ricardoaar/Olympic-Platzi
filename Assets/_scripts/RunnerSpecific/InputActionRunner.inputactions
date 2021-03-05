@@ -1,0 +1,208 @@
+{
+    "name": "InputActionRunner",
+    "maps": [
+        {
+            "name": "A_Fizq",
+            "id": "dc53624b-bf71-4390-9806-7ff5d5b6eda1",
+            "actions": [
+                {
+                    "name": "Button1",
+                    "type": "Button",
+                    "id": "ffdc5f89-b2c7-4510-afd3-b8fc7abd7d3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ea4d7df0-d7aa-4a7c-9bac-afb0cc6c0c59",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "main",
+                    "action": "Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fcad31a1-3cc1-449d-acd2-e1ba8fff9260",
+                    "path": "<XInputController>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "main",
+                    "action": "Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5b55cae1-d82c-4b3a-b906-b91d82e5e682",
+                    "path": "<DualShockGamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "S_Tizq",
+            "id": "f8626617-77b0-4f7c-aac4-8bdc4f618044",
+            "actions": [
+                {
+                    "name": "Button2",
+                    "type": "Button",
+                    "id": "d25cf6b6-5123-44d3-8936-c181b9799873",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "47c1b6a9-7c85-4811-ab4f-cf19dbde9d74",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89fec3b6-e659-4533-b214-c850abe1ef99",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "579a450b-746e-476b-940d-7e57f6ecfcbc",
+                    "path": "<DualShockGamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "D_Tder",
+            "id": "1fb45cc1-4c12-4b43-aa40-32edcfc52d8b",
+            "actions": [
+                {
+                    "name": "Button3",
+                    "type": "Button",
+                    "id": "983cbddc-6d8c-482c-bd5e-1af316d45694",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bdddefc7-7c88-4401-b228-6dabac3a843b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2b39a47-8bc3-4ba8-be63-7f4b70849f81",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74c5f3ea-6756-4f13-919f-ff62f60ff128",
+                    "path": "<DualShockGamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "F_B",
+            "id": "cf24d1b3-6b05-4481-91ec-9640c022758b",
+            "actions": [
+                {
+                    "name": "Button4",
+                    "type": "Button",
+                    "id": "d29f663c-d2c6-4619-b673-4a88db943b56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2a9e049a-4927-456f-8e3c-a9e36925d9db",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "846dc950-6343-4c91-8294-9fc42cb2391e",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23661233-f70a-4c8c-b79f-22e754350674",
+                    "path": "<DualShockGamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "main",
+            "bindingGroup": "main",
+            "devices": []
+        }
+    ]
+}

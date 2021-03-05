@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficult: 0
   targetGameVelocity: 0.6
+  initGameVelocity: 0.6
   initTimeForInput: 5
   initObstacleCreationRate: 6
   minObstacleVel: 4
   maxObstacleVel: 5
-  maxGhostInScene: 5
-  ghostVelocity: 3
+  counterOfDodgeClear: 3
+  limitForButtons: 3

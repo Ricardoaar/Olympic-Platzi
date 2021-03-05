@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
@@ -14,6 +13,7 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float _valueForGameVelocity;
 
     private Difficulty _currentDifficulty;
+    private int _phasesCount = 0;
 
     private void Awake()
     {
@@ -22,14 +22,15 @@ public class DifficultyManager : MonoBehaviour
         //runnerManager= FindObjectOfType<RunnerManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator Start()
     {
-        if (Time.realtimeSinceStartup / 15 >= 0.9996f && Time.realtimeSinceStartup / 15 <= 1f)
+        for (int i = 0; i < 15; i++)
         {
-            Debug.Log("IncreaseDifficulty");
-            IncreaseDifficulty();
+            yield return new WaitForSeconds(1f);
         }
+        Debug.Log("IncreaseDifficulty");
+        IncreaseDifficulty();
+        StartCoroutine(Start());
     }
 
     private void IncreaseDifficulty()
@@ -40,15 +41,25 @@ public class DifficultyManager : MonoBehaviour
 
         DecreaseTimeForInput();
 
-        _currentDifficulty.targetGameVelocity = _currentDifficulty.targetGameVelocity + _valueForGameVelocity;
-
+        _currentDifficulty.targetGameVelocity += _valueForGameVelocity;
+        _phasesCount++;
+        if(_phasesCount == 10)
+        {
+            _currentDifficulty.limitForButtons++;
+        }
     }
 
     private void DecreaseTimeForInput()
     {
-        transform.position = new Vector3(transform.position.x - _valueForInputTime,
-                                            transform.position.y,
-                                            transform.position.z);
+        //transform.position = new Vector3(transform.position.x - _valueForInputTime,
+        //                                    transform.position.y,
+        //                                    transform.position.z);
+
+        GetComponent<Collider2D>().offset = new Vector2(
+                                        GetComponent<Collider2D>().offset.x - _valueForInputTime, 
+                                        GetComponent<Collider2D>().offset.y);
+
     }
+
 
 }

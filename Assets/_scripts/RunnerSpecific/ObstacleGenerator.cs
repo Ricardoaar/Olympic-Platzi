@@ -11,7 +11,8 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _obstaclesSpeed;
     [SerializeField] private float _minObstaclesSpeed;
     [SerializeField] private float _maxObstaclesSpeed;
-    [SerializeField] private float _limitForYPosition;
+    [SerializeField] private float _limitForJumpYPosition;
+    [SerializeField] private float _limitForDuckYPosition;
     private Difficulty _currentDifficulty;
 
     private void Awake()
@@ -53,22 +54,39 @@ public class ObstacleGenerator : MonoBehaviour
         _obstaclesSpeed = Random.Range(_minObstaclesSpeed, _maxObstaclesSpeed);
 
         switch (tmp.GetObstacleType())
-        {
-            case ObstacleType.Jump:
+        {            
+
+            case ObstacleType.JumpGhost:
 
                 prefab.transform.position = new Vector3(prefab.transform.position.x,
                                                     Random.Range(tmp.GetMinYPosition(),
-                                                    _limitForYPosition), 0);
+                                                    _limitForJumpYPosition), 0);
+
+                break;
+
+            case ObstacleType.JumpBox:
+
+                prefab.transform.position = new Vector3(prefab.transform.position.x,
+                                                    tmp.GetMinYPosition(), 0);
 
                 break;
             case ObstacleType.Duck:
 
                 prefab.transform.position = new Vector3(prefab.transform.position.x,
-                                                            tmp.GetMinYPosition(), 0);
+                                                    Random.Range(tmp.GetMinYPosition(),
+                                                    _limitForDuckYPosition), 0);
 
                 break;
+
             default:
                 break;
+        }
+
+        if (tmp.GetObstacleType() == ObstacleType.Duck || tmp.GetObstacleType() == ObstacleType.JumpGhost)
+        {
+            Color[] colors = { Color.black, Color.white };
+            prefab.GetComponentsInChildren<SpriteRenderer>()[1].color =
+                                colors[Random.Range(0, colors.Length)];
         }
 
         GameObject instance = Instantiate(prefab,

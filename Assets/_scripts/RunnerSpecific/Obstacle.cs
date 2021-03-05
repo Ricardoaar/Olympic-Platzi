@@ -2,7 +2,8 @@
 
 public enum ObstacleType
 {
-    Jump,
+    JumpBox,
+    JumpGhost,
     Duck
 }
 
@@ -15,11 +16,26 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float minYPosition;
 
     [SerializeField] private GlobalFloat _gameVelocity;
+    private Animator _animator;
 
     private void Awake()
     {
         _referenceCreateObstacle = GameObject.Find("ReferenceCreateObstacle");
         _referenceKillObstacle = GameObject.Find("ReferenceKillObstacle");
+
+        if (GetComponent<Animator>())
+        {
+            _animator = GetComponent<Animator>();
+        }
+    }
+
+    private void Update()
+    {
+        if (_animator)
+        {
+            _animator.SetFloat("GlobalVelocity", _gameVelocity.vFloat + .1f);
+
+        }
     }
 
     private void FixedUpdate()
