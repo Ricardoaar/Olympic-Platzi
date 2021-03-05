@@ -7,6 +7,6 @@ public class ConfigElementSlider : ConfigElementBase
 
     private void OnEnable()
     {
-        _slider.value = PlayerPrefs.GetFloat(configParameter, 0.9f);
+        _slider.value = PlayerPrefs.GetFloat(configParameter, 0.5f);
     }
 }
