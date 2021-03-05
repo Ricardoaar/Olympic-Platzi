@@ -11,7 +11,7 @@ public class AudioSystemSerializer : MonoBehaviour
             Util.LinearToLogarithmic(PlayerPrefs.GetFloat("GeneralVolume", 0.9f))
         );
         _mixer.SetFloat("BGMVolume",
-            Util.LinearToLogarithmic(PlayerPrefs.GetFloat("BGMVolume", 0.7f))
+            Util.LinearToLogarithmic(PlayerPrefs.GetFloat("BGMVolume", 0.6f))
         );
         _mixer.SetFloat("SFXVolume",
             Util.LinearToLogarithmic(PlayerPrefs.GetFloat("SFXVolume", 0.8f))
