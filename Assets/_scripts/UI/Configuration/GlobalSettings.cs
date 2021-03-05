@@ -52,7 +52,7 @@ public class GlobalSettings : MonoBehaviour
 
     private void Start()
     {
-        RestoreDefaultSetting();
+        LoadCurrentSettings();
     }
 
     private void UpdateLanguage(Language newLanguage)
@@ -78,6 +78,12 @@ public class GlobalSettings : MonoBehaviour
     {
         UpdateLanguage(defaultSetting.language);
         ChangeTextSize(defaultSetting.txtSize);
+    }
+
+    private void LoadCurrentSettings()
+    {
+        UpdateLanguage(currentConfiguration.language);
+        ChangeTextSize(currentConfiguration.txtSize);
     }
 
 

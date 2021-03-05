@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3407978498040202205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 398.93817, y: 630.6578, z: -46.51447}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,3 +46,4 @@ MonoBehaviour:
   currentConfiguration: {fileID: 11400000, guid: 2db6475634ea28a41ad3ebc29f307d39,
     type: 2}
   defaultSetting: {fileID: 11400000, guid: ae860a336d2a1aa41932904b394e7855, type: 2}
+  difficulties: []
