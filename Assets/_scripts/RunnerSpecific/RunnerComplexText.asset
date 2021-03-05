@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7482e4b74be3640b8de4cc569bda10, type: 3}
-  m_Name: GameVelocity
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: RunnerComplexText
   m_EditorClassIdentifier: 
-  vFloat: 0
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: 2a29543687101854d9c10a39d6330ce4, type: 2}
+  - {fileID: 11400000, guid: d99f12d8cb5a09d49856ea6b9278073c, type: 2}

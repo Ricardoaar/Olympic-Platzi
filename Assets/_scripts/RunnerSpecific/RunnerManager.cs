@@ -60,6 +60,11 @@ public class RunnerManager : MonoBehaviour
     [SerializeField] private GameObject _buttonsContainer;
     [SerializeField] List<GameObject> _buttonsPrefabs;
 
+    [SerializeField] private TextStone _textStone;
+
+    [SerializeField] private ObstacleGenerator obsGenerator;
+    [SerializeField] private List<ParallaxBackground> parallaxBackground;
+
     private void OnEnable()
     {
         _input.Enable();
@@ -97,12 +102,20 @@ public class RunnerManager : MonoBehaviour
     private void Start()
     {
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
-
-        //_timeForInput = _currentDifficulty.initTimeForInput;
-        _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
-        _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
+        
         _limitForButtons = _currentDifficulty.limitForButtons;
 
+    }
+
+    public void InitGame()
+    {
+        obsGenerator.InitGeneration();
+        foreach (var item in parallaxBackground)
+        {
+            item.SetInitGame();
+        }
+        _gameVelocity.vFloat = _currentDifficulty.initGameVelocity;
+        _currentDifficulty.targetGameVelocity = _currentDifficulty.initGameVelocity;
     }
 
     // Update is called once per frame
@@ -263,5 +276,10 @@ public class RunnerManager : MonoBehaviour
         {
             ResetParameters();
         }
+    }
+
+    public void PlayTextStone()
+    {
+        _textStone.PlayerTrigger();
     }
 }

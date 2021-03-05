@@ -30,8 +30,6 @@ public class ObstacleGenerator : MonoBehaviour
         _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
         _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
 
-        StartCoroutine(GenerateObstacle());
-
     }
 
     public void InitGeneration()
@@ -43,9 +41,9 @@ public class ObstacleGenerator : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(creationRate);
             CreateObstacle();
 
-            yield return new WaitForSeconds(creationRate);
         }
     }
 

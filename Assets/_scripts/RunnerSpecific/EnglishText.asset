@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7482e4b74be3640b8de4cc569bda10, type: 3}
-  m_Name: GameVelocity
+  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
+  m_Name: EnglishText
   m_EditorClassIdentifier: 
-  vFloat: 0
+  textLanguage: 1
+  text: There are only two mistakes that can be made on the way to the truth; don't
+    go all the way and don't start it
