@@ -2,7 +2,7 @@
 
 public class SoundEvents : MonoBehaviour
 {
-    [SerializeField] private AudioClip playerJumpClip, gameOverClip, lvlSfxLoop, ghostDie;
+    [SerializeField] private AudioClip playerJumpClip, gameOverClip, lvlSfxLoop, ghostDie, finalSound;
 
     private void PlayGameOver()
     {
@@ -32,6 +32,7 @@ public class SoundEvents : MonoBehaviour
         PlatPlayerInteractive.OnKillEnemy += PlayGhostDie;
         PlayerPlatformInput.OnPlayerJump += PlayJump;
         GameManagePlatform.OnReloadGame += OnReloadGame;
+        GameManagePlatform.OnWinScene += PlayFinalButton;
     }
 
     private void OnDisable()
@@ -40,10 +41,16 @@ public class SoundEvents : MonoBehaviour
         PlatPlayerInteractive.OnKillEnemy -= PlayGhostDie;
         PlayerPlatformInput.OnPlayerJump -= PlayJump;
         GameManagePlatform.OnReloadGame -= OnReloadGame;
+        GameManagePlatform.OnWinScene -= PlayFinalButton;
     }
 
     private void OnReloadGame()
     {
         AudioSystem.SI.PlayBGM(lvlSfxLoop);
+    }
+
+    public void PlayFinalButton()
+    {
+        AudioSystem.SI.PlaySFX(finalSound);
     }
 }

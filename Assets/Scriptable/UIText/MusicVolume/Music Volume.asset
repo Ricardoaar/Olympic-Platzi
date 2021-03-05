@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e7441109aa4e0f8a9c05d9572fb6d5, type: 3}
-  m_Name: H1
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: Music Volume
   m_EditorClassIdentifier: 
-  Category: 0
-  smallSize: 55
-  mediumSize: 60
-  bigSize: 65
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: 6026df5f006065d479360a958c6227c7, type: 2}
+  - {fileID: 11400000, guid: 3072229de7c532a4fa07a1edadb87abf, type: 2}

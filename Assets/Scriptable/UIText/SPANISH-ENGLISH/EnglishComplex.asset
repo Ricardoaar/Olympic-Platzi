@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e7441109aa4e0f8a9c05d9572fb6d5, type: 3}
-  m_Name: H1
+  m_Script: {fileID: 11500000, guid: c2c2faeaac6f49d68d1f0dfe98402027, type: 3}
+  m_Name: EnglishComplex
   m_EditorClassIdentifier: 
-  Category: 0
-  smallSize: 55
-  mediumSize: 60
-  bigSize: 65
+  textInDifferentLanguages:
+  - {fileID: 11400000, guid: 86f5b4b57eb683d418f404b0d4f9e0e3, type: 2}
+  - {fileID: 11400000, guid: 8df050124cb2b474bb6fa89d8c15b28b, type: 2}
