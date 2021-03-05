@@ -21,7 +21,7 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     private Difficulty _currentDifficulty;
 
     private int _counterOfDodgeClear;
-    private float _multiplierDistanceForAction = 3f;
+    private float _multiplierDistanceForAction = 3.2f;
 
     private void Awake()
     {
@@ -95,14 +95,14 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
             {
                 switch (obstacle.GetObstacleType())
                 {
-                    case var tmp when (tmp == ObstacleType.JumpBox || tmp == ObstacleType.JumpGhost):
+                    case var tmp when (tmp == ObstacleType.JumpHands || tmp == ObstacleType.JumpGhost):
 
                         _animator.SetTrigger("Jump");
                         _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y 
                                         + Mathf.Abs(obstacle.GetMinYPosition()) * _forceNormalizer;
                         _rb.AddRelativeForce(transform.up * _forceToJump, ForceMode2D.Impulse);
                         break;
-                    case ObstacleType.Duck:
+                    case var type when (type == ObstacleType.DuckGhost || type == ObstacleType.DuckStaticGhost):
 
                         _animator.SetTrigger("Duck");
 

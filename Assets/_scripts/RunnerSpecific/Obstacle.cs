@@ -2,9 +2,10 @@
 
 public enum ObstacleType
 {
-    JumpBox,
+    JumpHands,
     JumpGhost,
-    Duck
+    DuckGhost,
+    DuckStaticGhost
 }
 
 public class Obstacle : MonoBehaviour
@@ -14,6 +15,7 @@ public class Obstacle : MonoBehaviour
     private GameObject _referenceKillObstacle;
     private GameObject _referenceCreateObstacle;
     [SerializeField] private float minYPosition;
+    [SerializeField] private float _speedCorrection = -1;
 
     [SerializeField] private GlobalFloat _gameVelocity;
     private Animator _animator;
@@ -40,7 +42,7 @@ public class Obstacle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(-_speed * Time.deltaTime * _gameVelocity.vFloat, 0, 0);
+        transform.Translate(_speed * Time.deltaTime * _gameVelocity.vFloat * _speedCorrection * -1, 0, 0);
         CheckObstacleLimit();
     }
 

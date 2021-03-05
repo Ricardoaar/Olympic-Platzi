@@ -438,16 +438,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacles:
-  - {fileID: 751640472887954147, guid: 31c35c6d54c57654091667a66545022e, type: 3}
-  - {fileID: 6809104526468580965, guid: eb1679fd5279ece469d31d9c4f342d4e, type: 3}
   - {fileID: 4489882853241880604, guid: aa4dd16fc4d9c784182cefcf868d693b, type: 3}
+  - {fileID: 6809104526468580965, guid: eb1679fd5279ece469d31d9c4f342d4e, type: 3}
+  - {fileID: 751640472887954147, guid: 31c35c6d54c57654091667a66545022e, type: 3}
+  - {fileID: 751640472887954147, guid: 1e543db4cbbc72c429259f3682106cba, type: 3}
   creationRate: 6
   parentForObstacles: {fileID: 2001210622}
   _obstaclesSpeed: 4
   _minObstaclesSpeed: 0
   _maxObstaclesSpeed: 0
   _limitForJumpYPosition: -3
-  _limitForDuckYPosition: -2.76
+  _limitForDuckYPosition: -3
+  _gameVelocity: {fileID: 11400000, guid: f458433aa075f5f40b62d72ff04d06fe, type: 2}
 --- !u!4 &578783207
 Transform:
   m_ObjectHideFlags: 0
@@ -1839,8 +1841,8 @@ MonoBehaviour:
   - {fileID: 6568792607494127934}
   - {fileID: 3707955198091337812}
   m_Bounds:
-    m_Center: {x: 0.13058874, y: 0.008100241, z: 0}
-    m_Extent: {x: 0.100576565, y: 0.16682473, z: 0}
+    m_Center: {x: 0.13058874, y: 0.00810048, z: 0}
+    m_Extent: {x: 0.100576565, y: 0.16682449, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &3354903249415568188
@@ -1982,6 +1984,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 827112490, guid: 0c9f53bc470fd274ea30626ed7d3adae, type: 3}
+      propertyPath: m_Size.y
+      value: 0.81744385
+      objectReference: {fileID: 0}
+    - target: {fileID: 827112490, guid: 0c9f53bc470fd274ea30626ed7d3adae, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.091278076
+      objectReference: {fileID: 0}
     - target: {fileID: 3803312221309235516, guid: 0c9f53bc470fd274ea30626ed7d3adae,
         type: 3}
       propertyPath: initialBackgroundVelocity
@@ -2088,7 +2098,7 @@ PrefabInstance:
     - target: {fileID: -9147769754764459235, guid: bdb9cc42b120c6d4f85e63e749513109,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.012504441
+      value: 0.012504444
       objectReference: {fileID: 0}
     - target: {fileID: -9147769754764459235, guid: bdb9cc42b120c6d4f85e63e749513109,
         type: 3}
@@ -2133,7 +2143,7 @@ PrefabInstance:
     - target: {fileID: -6118818889403269309, guid: bdb9cc42b120c6d4f85e63e749513109,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0037035474
+      value: 0.0037035586
       objectReference: {fileID: 0}
     - target: {fileID: -5858069757500597125, guid: bdb9cc42b120c6d4f85e63e749513109,
         type: 3}
@@ -2745,7 +2755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5167397217348458535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.27999997, y: -2.4, z: 0}
+  m_LocalPosition: {x: -0.27999997, y: -3.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1034229412}
@@ -2840,7 +2850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameVelocity: {fileID: 11400000, guid: f458433aa075f5f40b62d72ff04d06fe, type: 2}
   _forceForDamage: 180
-  _forceNormalizer: 12
+  _forceNormalizer: 10
   _enemy: {fileID: 1971383045}
   HurtPlayer:
     m_PersistentCalls:
@@ -3007,7 +3017,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3100316716435452528}
-  m_LocalRotation: {x: -0, y: -0, z: -0.008230175, w: 0.99996614}
+  m_LocalRotation: {x: -0, y: -0, z: -0.008230182, w: 0.99996614}
   m_LocalPosition: {x: 0.135, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

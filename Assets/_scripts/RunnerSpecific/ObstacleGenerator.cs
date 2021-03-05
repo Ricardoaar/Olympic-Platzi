@@ -15,6 +15,9 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _limitForDuckYPosition;
     private Difficulty _currentDifficulty;
 
+    [SerializeField] private GlobalFloat _gameVelocity;
+
+
     private void Awake()
     {
         _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
@@ -64,13 +67,13 @@ public class ObstacleGenerator : MonoBehaviour
 
                 break;
 
-            case ObstacleType.JumpBox:
+            case ObstacleType.JumpHands:
 
                 prefab.transform.position = new Vector3(prefab.transform.position.x,
                                                     tmp.GetMinYPosition(), 0);
-
+                _obstaclesSpeed = 1;
                 break;
-            case ObstacleType.Duck:
+            case ObstacleType.DuckGhost:
 
                 prefab.transform.position = new Vector3(prefab.transform.position.x,
                                                     Random.Range(tmp.GetMinYPosition(),
@@ -78,11 +81,19 @@ public class ObstacleGenerator : MonoBehaviour
 
                 break;
 
+            case ObstacleType.DuckStaticGhost:
+
+                prefab.transform.position = new Vector3(prefab.transform.position.x,
+                                                    Random.Range(tmp.GetMinYPosition(),
+                                                    _limitForDuckYPosition), 0);
+                _obstaclesSpeed = 1;
+
+                break;
             default:
                 break;
         }
 
-        if (tmp.GetObstacleType() == ObstacleType.Duck || tmp.GetObstacleType() == ObstacleType.JumpGhost)
+        if (tmp.GetObstacleType() == ObstacleType.DuckGhost || tmp.GetObstacleType() == ObstacleType.JumpGhost)
         {
             Color[] colors = { Color.black, Color.white };
             prefab.GetComponentsInChildren<SpriteRenderer>()[1].color =

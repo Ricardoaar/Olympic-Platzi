@@ -89,7 +89,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: MoveY
-    m_EventTreshold: -2
+    m_EventTreshold: -3.4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5575044222485605229}
   m_Solo: 0
@@ -246,18 +246,18 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 4
     m_ConditionEvent: MoveY
-    m_EventTreshold: -0.5
+    m_EventTreshold: -0.9
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7142399187701657729}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.022653047
   m_TransitionOffset: 0
-  m_ExitTime: 0.42307693
+  m_ExitTime: 0.3594198
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
