@@ -27,7 +27,7 @@ public class TextSettings : MonoBehaviour
     {
         if (text != null)
         {
-            GlobalSettings.OnUpdateLanguage -= UpdateLanguage;
+            GlobalSettings.OnUpdateLanguage += UpdateLanguage;
         }
 
         GlobalSettings.OnUpdateTextSize += UpdateTextSize;
