@@ -18,7 +18,7 @@ public class TextStone : MonoBehaviour
         PlatPlayerInteractive.OnStoneEnter -= PlayerTrigger;
     }
 
-    private void PlayerTrigger()
+    public void PlayerTrigger()
     {
         TextWriter.Instance.WriteText(text.MainText.text, voiceText.length);
         AudioSystem.SI.PlaySFX(voiceText);

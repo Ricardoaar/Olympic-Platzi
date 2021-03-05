@@ -22,7 +22,12 @@ public class DifficultyManager : MonoBehaviour
         //runnerManager= FindObjectOfType<RunnerManager>();
     }
 
-    private IEnumerator Start()
+    public void InitGame()
+    {
+        StartCoroutine(StartGame());
+    }
+
+    private IEnumerator StartGame()
     {
         for (int i = 0; i < 15; i++)
         {
@@ -30,7 +35,7 @@ public class DifficultyManager : MonoBehaviour
         }
         Debug.Log("IncreaseDifficulty");
         IncreaseDifficulty();
-        StartCoroutine(Start());
+        StartCoroutine(StartGame());
     }
 
     private void IncreaseDifficulty()

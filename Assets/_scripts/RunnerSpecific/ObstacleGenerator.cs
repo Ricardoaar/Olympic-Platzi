@@ -15,8 +15,9 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _limitForDuckYPosition;
     private Difficulty _currentDifficulty;
 
-    [SerializeField] private GlobalFloat _gameVelocity;
+    private bool _generateObstacles = true;
 
+    [SerializeField] private GlobalFloat _gameVelocity;
 
     private void Awake()
     {
@@ -30,8 +31,6 @@ public class ObstacleGenerator : MonoBehaviour
         _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
         _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
 
-        StartCoroutine(GenerateObstacle());
-
     }
 
     public void InitGeneration()
@@ -39,13 +38,18 @@ public class ObstacleGenerator : MonoBehaviour
         StartCoroutine(GenerateObstacle());
     }
 
+    public void OffGenerateObstacles()
+    {
+        _generateObstacles = false;
+    }
+
     private IEnumerator GenerateObstacle()
     {
-        while (true)
+        while (_generateObstacles)
         {
+            yield return new WaitForSeconds(creationRate);
             CreateObstacle();
 
-            yield return new WaitForSeconds(creationRate);
         }
     }
 

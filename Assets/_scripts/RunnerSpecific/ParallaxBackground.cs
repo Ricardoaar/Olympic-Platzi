@@ -16,6 +16,8 @@ public class ParallaxBackground : MonoBehaviour
 
     [SerializeField] private GlobalFloat _gameVelocity;
 
+    [SerializeField] private bool _initGame = false;
+
     private void Awake()
     {
         _currentBackgroundVelocity = initialBackgroundVelocity;
@@ -27,7 +29,10 @@ public class ParallaxBackground : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //TODO condicional que detenga el juego
+        if (!_initGame)
+        {
+            return;
+        }
         transform.Translate(-_currentBackgroundVelocity * Time.deltaTime * _gameVelocity.vFloat, 0, 0);
         if(_currentBackgroundVelocity < _velLimit)
         {
@@ -35,5 +40,10 @@ public class ParallaxBackground : MonoBehaviour
         }
         transform.position = -transform.position.x > _initialPosition.x + _sizeX ? _initialPosition : transform.position;
         //Debug.Log(_sizeX, gameObject);
+    }
+
+    public void SetInitGame()
+    {
+        _initGame = !_initGame;
     }
 }

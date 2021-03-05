@@ -23,6 +23,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     private int _counterOfDodgeClear;
     private float _multiplierDistanceForAction = 3.2f;
 
+    private bool _initGame = false;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -39,6 +41,10 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     // Update is called once per frame
     void Update()
     {
+        if (!_initGame)
+        {
+            return;
+        }
         _animator.SetFloat("GlobalVelocity", _gameVelocity.vFloat + .1f);
         _animator.SetFloat("MoveY", transform.position.y);
         _enemy.GetComponent<Animator>().SetFloat("GlobalVelocity",
@@ -52,6 +58,11 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
 
         }
         
+    }
+
+    public void SetInitGame()
+    {
+        _initGame = !_initGame;
     }
 
     public void Notify(Obstacle obstacle)
