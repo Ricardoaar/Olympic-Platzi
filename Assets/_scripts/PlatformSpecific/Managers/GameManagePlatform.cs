@@ -11,11 +11,18 @@ public class GameManagePlatform : MonoBehaviour
     [SerializeField] private Transform initialPosition;
     private Coroutine _cReloadScene;
     [SerializeField] private GameObject timeLineSceneChange;
+    [SerializeField] private GameObject settingMenu;
 
     private void OnEnable()
     {
         OnWinScene += OnWinSceneManager;
         PlatPlayerInteractive.OnDamage += OnPlayerDamage;
+        PlayerPlatformInput.OnPause += OnPause;
+    }
+
+    private void OnPause(bool active)
+    {
+        settingMenu.SetActive(active);
     }
 
     private void OnWinSceneManager()
@@ -26,6 +33,8 @@ public class GameManagePlatform : MonoBehaviour
     private void OnDisable()
     {
         PlatPlayerInteractive.OnDamage -= OnPlayerDamage;
+        PlayerPlatformInput.OnPause -= OnPause;
+        OnWinScene -= OnWinSceneManager;
     }
 
     public void OnPlayerDamage()

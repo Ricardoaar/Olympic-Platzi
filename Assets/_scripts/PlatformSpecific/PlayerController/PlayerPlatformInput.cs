@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Events;
 
 public delegate void Vector2Event(Vector2 vector);
 
@@ -144,8 +146,26 @@ public class PlayerPlatformInput : MonoBehaviour
         _controller.Main.Movement.canceled += ctx => _direction = Vector2.zero;
         _controller.Main.Jump.performed += ctx => Jump();
         _controller.Main.CancelAction.performed += ctx => Dash();
-        _controller.Main.Shirnk.performed += ctx => Shrink(true);
-        _controller.Main.Shirnk.canceled += ctx => Shrink(false);
+        _controller.Main.Pause.performed += ctx => Pause();
+    }
+
+    public static UnityAction<bool> OnPause;
+
+    private void Pause()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+
+            OnPause.Invoke(false);
+        }
+        else if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            OnPause.Invoke(true);
+        }
+        else
+            print("wtf");
     }
 
     private void Shrink(bool pressed)
