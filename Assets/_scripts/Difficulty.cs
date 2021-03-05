@@ -8,7 +8,7 @@ public enum Difficult
 }
 
 [CreateAssetMenu(fileName = "Difficulty")]
-public class DifficultyScriptable : ScriptableObject
+public class Difficulty : ScriptableObject
 {
     #region General
 

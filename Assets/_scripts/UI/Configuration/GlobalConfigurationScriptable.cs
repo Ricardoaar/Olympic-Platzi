@@ -7,5 +7,5 @@ public class GlobalConfigurationScriptable : ScriptableObject
     public string categoryName;
     public TxtSize txtSize;
     public Language language;
-    [FormerlySerializedAs("Difficulty")] public DifficultyScriptable difficultyScriptable;
+    [FormerlySerializedAs("difficultyScriptable")] [FormerlySerializedAs("Difficulty")] public Difficulty difficulty;
 }

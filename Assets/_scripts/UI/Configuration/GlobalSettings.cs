@@ -31,11 +31,11 @@ public class GlobalSettings : MonoBehaviour
 {
     public static TxtSize CurrentTextSize;
     public static Language GlobalLanguage;
-    public static DifficultyScriptable CurrentDifficult;
+    public static Difficulty CurrentDifficult;
 
     [SerializeField] private GlobalConfigurationScriptable currentConfiguration;
     [SerializeField] private GlobalConfigurationScriptable defaultSetting;
-    [SerializeField] private List<DifficultyScriptable> difficulties = new List<DifficultyScriptable>();
+    [SerializeField] private List<Difficulty> difficulties = new List<Difficulty>();
 
     private static GlobalSettings _instance;
     public static LanguageEvent OnUpdateLanguage;
@@ -67,10 +67,10 @@ public class GlobalSettings : MonoBehaviour
         UpdateDifficult(difficulties[difficult]);
     }
 
-    private void UpdateDifficult(DifficultyScriptable difficult)
+    private void UpdateDifficult(Difficulty difficult)
     {
         CurrentDifficult = difficult;
-        currentConfiguration.difficultyScriptable = CurrentDifficult;
+        currentConfiguration.difficulty = CurrentDifficult;
     }
 
 

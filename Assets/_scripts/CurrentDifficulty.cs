@@ -3,6 +3,6 @@ using UnityEngine.Serialization;
 
 public class CurrentDifficulty : MonoBehaviour
 {
-    [FormerlySerializedAs("currentDifficulty")] public DifficultyScriptable currentDifficultyScriptable;
+    [FormerlySerializedAs("currentDifficultyScriptable")] public Difficulty currentDifficulty;
     
 }
