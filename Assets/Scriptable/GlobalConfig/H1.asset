@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: 0
   smallSize: 55
-  mediumSize: 65
-  bigSize: 75
+  mediumSize: 60
+  bigSize: 65

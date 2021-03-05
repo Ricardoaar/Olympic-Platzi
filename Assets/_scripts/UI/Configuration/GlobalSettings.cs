@@ -49,12 +49,10 @@ public class GlobalSettings : MonoBehaviour
             _instance = this;
         }
         else Destroy(gameObject);
+
         LoadCurrentSettings();
     }
 
-    private void Start()
-    {
-    }
 
     private void UpdateLanguage(Language newLanguage)
     {

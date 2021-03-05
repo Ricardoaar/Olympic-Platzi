@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
   m_Name: SpaceEnglish
   m_EditorClassIdentifier: 
-  textLanguage: 0
+  textLanguage: 1
   text: Jump
