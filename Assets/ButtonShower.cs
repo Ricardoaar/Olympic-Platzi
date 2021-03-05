@@ -24,7 +24,6 @@ public class ButtonShower : MonoBehaviour
     private void ShowInputs()
     {
         _lastInput = _input.currentControlScheme;
-        Debug.Log(_input.currentControlScheme);
         switch (_lastInput)
         {
             case "Keyboard":

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NOQUEDATIEMPO : MonoBehaviour
 {
-    [SerializeField] private GameObject anim;
+    [SerializeField] private Animator anim;
     private static readonly int AnimatorNoquedatiempo = Animator.StringToHash("NOQUEDATIEMPO");
 
     private void Awake()
