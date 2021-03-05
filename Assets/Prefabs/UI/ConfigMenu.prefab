@@ -416,7 +416,9 @@ MonoBehaviour:
   currentConfiguration: {fileID: 11400000, guid: 2db6475634ea28a41ad3ebc29f307d39,
     type: 2}
   defaultSetting: {fileID: 11400000, guid: ae860a336d2a1aa41932904b394e7855, type: 2}
-  difficulties: []
+  difficulties:
+  - {fileID: 11400000, guid: e779891ecbce92a46b47eb7e9bdf0161, type: 2}
+  - {fileID: 11400000, guid: a89e9c184a88a0b47852f638ab7c0063, type: 2}
 --- !u!1 &3650552026377714578
 GameObject:
   m_ObjectHideFlags: 0
