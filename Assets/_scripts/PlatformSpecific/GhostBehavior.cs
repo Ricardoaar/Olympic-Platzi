@@ -183,7 +183,7 @@ public class GhostBehavior : DieOnAnimationFinishComponent
         ghostCollider.enabled = true;
         ghostAnimator.SetBool(AnimatorIsAlive, true);
         canDead = false;
-        _ghostType = Random.Range(0, 1.0f) > 0.5f ? GhostType.Dark : GhostType.White;
+        _ghostType = transform.position.x > _player.transform.position.x ? GhostType.White : GhostType.Dark;
         ownSprite.color = _ghostType == GhostType.Dark ? Color.black : Color.white;
         velocity = _initialVelocity;
     }
