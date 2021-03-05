@@ -375,7 +375,7 @@ public class RunnerManager : MonoBehaviour
 
     public void NextScene()
     {
-        SceneManager.LoadSceneAsync(4);
+        SceneManager.LoadScene(4);
     }
 
     public void PlayMusicBG()
