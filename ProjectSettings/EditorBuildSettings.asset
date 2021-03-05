@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FirstCinematic.unity
+    path: Assets/Scenes/Kyplim/MainMenu.unity
+    guid: 6b0af01fdf02b9d46a732c7031fb8c71
+  - enabled: 1
+    path: Assets/Scenes/Final/1.-FirstCinematic.unity
     guid: 341d3063a30f2584798f909ae293dae9
   - enabled: 1
     path: Assets/Scenes/Run/PlatformPrototype.unity
@@ -17,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kyplim/Topdown-lv-3.unity
     guid: 9d51c70484230ae41ae1ef78a0efa52e
+  - enabled: 1
+    path: Assets/Scenes/Final/5.- FinalCinematic.unity
+    guid: 890b3f4d41866184790e82c8618f7a35
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 791eed894c0aa4841bbd6015318a47da,
       type: 2}

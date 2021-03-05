@@ -1,22 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Video;
 
+// ReSharper disable once InconsistentNaming
 public class URLoader : MonoBehaviour
 {
     [SerializeField] private PlayableDirector videoTimeline;
 
     [SerializeField] private VideoPlayer videoPlayerClip;
 
+    [SerializeField] private String cinematicName;
+
     private void Awake()
     {
-        videoPlayerClip.url = System.IO.Path.Combine(Application.streamingAssetsPath, "cinematica_1_sin_audio.mp4");
+        videoPlayerClip.url = Path.Combine(Application.streamingAssetsPath, $"{cinematicName}");
 
-        StartCoroutine(_enableAudio());
+        StartCoroutine(ActiveAudio());
     }
 
-    private IEnumerator _enableAudio()
+    private IEnumerator ActiveAudio()
     {
         yield return new WaitUntil(() => videoPlayerClip.isPrepared);
         videoTimeline.Play();
