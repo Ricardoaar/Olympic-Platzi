@@ -44,7 +44,6 @@ public class PlatPlayerInteractive : MonoBehaviour
         if (other.CompareTag("FinalScene"))
         {
             GameManagePlatform.OnWinScene.Invoke();
-            
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("TextStone"))
@@ -77,15 +76,13 @@ public class PlatPlayerInteractive : MonoBehaviour
         killEnemy = false;
         switch (ghostType.GetGhostType)
         {
-            case GhostBehavior.GhostType.Dark when Math.Abs(root.transform.eulerAngles.y - 180) < 0.5f &&
-                                                   transform.position.x + 0.2f > ghost.transform.position.x:
+            case GhostBehavior.GhostType.Dark when Math.Abs(root.transform.eulerAngles.y - 180) < 0.5f:
                 ghostType.Die();
                 killEnemy = true;
                 OnKillEnemy.Invoke();
 
                 return;
-            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity &&
-                                                    transform.position.x - 0.2f < ghost.transform.position.x:
+            case GhostBehavior.GhostType.White when root.transform.rotation == Quaternion.identity:
                 ghostType.Die();
                 killEnemy = true;
                 OnKillEnemy.Invoke();
