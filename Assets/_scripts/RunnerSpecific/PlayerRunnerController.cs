@@ -29,7 +29,7 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficulty = GlobalSettings.CurrentDifficult;
 
     }
 

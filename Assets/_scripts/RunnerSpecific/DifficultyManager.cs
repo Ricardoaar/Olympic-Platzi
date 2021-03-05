@@ -12,12 +12,18 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float _valueForInputTime;
     [SerializeField] private float _valueForGameVelocity;
 
+    public const float LIMIT_OBS_CREATION_RATE = 0;
+    //[SerializeField] private float _valueForObsMinVel;
+    //[SerializeField] private float _valueForObsMaxVel;
+    //[SerializeField] private float _valueForInputTime;
+    //[SerializeField] private float _valueForGameVelocity;
+
     private Difficulty _currentDifficulty;
     private int _phasesCount = 0;
 
     private void Awake()
     {
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficulty = GlobalSettings.CurrentDifficult;
         obsGenerator = FindObjectOfType<ObstacleGenerator>();
         //runnerManager= FindObjectOfType<RunnerManager>();
     }

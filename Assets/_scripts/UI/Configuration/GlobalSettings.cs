@@ -27,6 +27,7 @@ public delegate void LanguageEvent(Language text);
 
 public delegate void TextSizeEvent(TxtSize txtSize);
 
+[DefaultExecutionOrder(-1000)]
 public class GlobalSettings : MonoBehaviour
 {
     public static TxtSize CurrentTextSize;
@@ -48,11 +49,11 @@ public class GlobalSettings : MonoBehaviour
             _instance = this;
         }
         else Destroy(gameObject);
+        LoadCurrentSettings();
     }
 
     private void Start()
     {
-        LoadCurrentSettings();
     }
 
     private void UpdateLanguage(Language newLanguage)
@@ -84,6 +85,7 @@ public class GlobalSettings : MonoBehaviour
     {
         UpdateLanguage(currentConfiguration.language);
         ChangeTextSize(currentConfiguration.txtSize);
+        UpdateDifficult(currentConfiguration.difficulty);
     }
 
 
