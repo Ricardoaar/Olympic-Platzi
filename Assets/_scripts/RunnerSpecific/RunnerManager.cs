@@ -67,6 +67,8 @@ public class RunnerManager : MonoBehaviour
     [SerializeField] private ObstacleGenerator obsGenerator;
     [SerializeField] private List<ParallaxBackground> parallaxBackground;
 
+    [SerializeField] private AudioClip _bgClip;
+
     private void OnEnable()
     {
         _input.Enable();
@@ -96,16 +98,16 @@ public class RunnerManager : MonoBehaviour
         //Tres fases performed, darle click
         //no me la se
         //canceled dejar de presionar
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficulty = GlobalSettings.CurrentDifficult;
         _activeInputObservers = new List<IActiveInputObserver>();
 
     }
 
     private void Start()
     {
+        _limitForButtons = _currentDifficulty.limitForButtons;
         AddObserver(_PlayerRunnerController.GetComponent<PlayerRunnerController>());
         
-        _limitForButtons = _currentDifficulty.limitForButtons;
 
     }
 
@@ -127,12 +129,6 @@ public class RunnerManager : MonoBehaviour
         {
             CheckInput();
             CheckDistanceObstaclePlayer();
-        }
-
-        if (Keyboard.current.spaceKey.isPressed)
-        {
-            if (OnWin != null)
-                OnWin.Invoke();
         }
 
     }
@@ -295,5 +291,10 @@ public class RunnerManager : MonoBehaviour
     public void NextScene()
     {
         SceneManager.LoadSceneAsync(4);
+    }
+
+    public void PlayMusicBG()
+    {
+        //AudioSystem.SI.PlayBGM(_bgClip);
     }
 }

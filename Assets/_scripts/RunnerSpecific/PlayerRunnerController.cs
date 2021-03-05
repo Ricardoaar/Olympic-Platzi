@@ -24,12 +24,13 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
     private float _multiplierDistanceForAction = 3.2f;
 
     private bool _initGame = false;
+    [SerializeField] private AudioClip _jumpClip;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
+        _currentDifficulty = GlobalSettings.CurrentDifficult;
 
     }
 
@@ -112,6 +113,8 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
                         _forceToJump = obstacle.GetComponent<BoxCollider2D>().bounds.size.y 
                                         + Mathf.Abs(obstacle.GetMinYPosition()) * _forceNormalizer;
                         _rb.AddRelativeForce(transform.up * _forceToJump, ForceMode2D.Impulse);
+
+                        AudioSystem.SI.PlaySFX(_jumpClip);
                         break;
                     case var type when (type == ObstacleType.DuckGhost || type == ObstacleType.DuckStaticGhost):
 
@@ -129,7 +132,6 @@ public class PlayerRunnerController : MonoBehaviour, IActiveInputObserver
         }
 
     }
-
 
     public void SetInputListener()
     {

@@ -21,12 +21,12 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void Awake()
     {
-        _currentDifficulty = GameObject.Find("CurrentDifficulty").GetComponent<CurrentDifficulty>().currentDifficulty;
 
     }
 
     private void Start()
     {
+        _currentDifficulty = GlobalSettings.CurrentDifficult;
         creationRate = _currentDifficulty.initObstacleCreationRate;
         _minObstaclesSpeed = _currentDifficulty.minObstacleVel;
         _maxObstaclesSpeed = _currentDifficulty.maxObstacleVel;
