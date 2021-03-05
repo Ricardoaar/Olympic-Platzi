@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -105,10 +104,6 @@ public class PlayerPlatformInput : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ladder")) return;
-        _inLadder = false;
-        ExitLadder();
-
         if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
         {
             NOQUEDATIEMPO.Invoke(false);
@@ -117,18 +112,15 @@ public class PlayerPlatformInput : MonoBehaviour
 
 
     public static UnityAction<bool> NOQUEDATIEMPO;
+    public static UnityAction<bool> SIQUEDATIEMPO;
 
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
         {
             NOQUEDATIEMPO.Invoke(true);
         }
-
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ladder")) return;
-        _inLadder = true;
-        _ladderCollider = other;
     }
 
 
@@ -233,7 +225,7 @@ public class PlayerPlatformInput : MonoBehaviour
     }
 
     public static bool CanDash;
-    public static System.Action OnDash;
+    public static Action OnDash;
 
     // private IEnumerator ReloadDash()
     // {
