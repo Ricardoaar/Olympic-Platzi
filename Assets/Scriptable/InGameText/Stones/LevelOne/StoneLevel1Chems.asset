@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d97328ef2ba3f1b4c9b78b2e296350ab, type: 3}
-  m_Name: Hard
+  m_Script: {fileID: 11500000, guid: 50ac15a2e9a2460abc516900a065b461, type: 3}
+  m_Name: StoneLevel1Chems
   m_EditorClassIdentifier: 
-  difficult: 1
-  targetGameVelocity: 854165
-  initTimeForInput: 5416
-  initObstacleCreationRate: 213
-  minObstacleVel: 231
-  maxObstacleVel: 2313
-  maxGhostInScene: 7
-  ghostVelocity: 4
+  textLanguage: 2
+  text: Embeses el fumturo es imsierto, olmbida a tum ex para pomder ambansar

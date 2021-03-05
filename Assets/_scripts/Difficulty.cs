@@ -1,8 +1,21 @@
 ﻿using UnityEngine;
 
+
+public enum Difficult
+{
+    easy,
+    hard
+}
+
 [CreateAssetMenu(fileName = "Difficulty")]
 public class Difficulty : ScriptableObject
 {
+    #region General
+
+    [Header("General")] public Difficult difficult;
+
+    #endregion
+
     #region Runner
 
     [Header("Runner")]
@@ -14,4 +27,7 @@ public class Difficulty : ScriptableObject
     public int counterOfDodgeClear;
     public int limitForButtons;
     #endregion
+
+    [Header("Platform")] public int maxGhostInScene;
+    public float ghostVelocity;
 }
