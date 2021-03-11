@@ -179,6 +179,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 71bee5f6-dfc2-4ca0-b6b3-9c59e7ccbb3a
     m_ActionName: PlayerInvented/Move[/Keyboard/s,/Keyboard/w,/Keyboard/d,/Keyboard/a,/Keyboard/downArrow,/Keyboard/upArrow,/Keyboard/rightArrow,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 131981e9-5ad6-486c-93fe-74f00bc2fdf6
+    m_ActionName: PlayerNormal/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53a54c34-690c-45de-9285-37372f703dff
+    m_ActionName: PlayerInvented/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerNormal
@@ -237,8 +245,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0060842037, y: -0.16579616}
-  m_Size: {x: 0.48284292, y: 0.6744921}
+  m_Offset: {x: 0.0060842037, y: -0.21408963}
+  m_Size: {x: 0.48284292, y: 0.5779052}
   m_Direction: 0
 --- !u!82 &7719130439337098553
 AudioSource:
