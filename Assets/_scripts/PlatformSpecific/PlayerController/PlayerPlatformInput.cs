@@ -106,20 +106,19 @@ public class PlayerPlatformInput : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
         {
-            NOQUEDATIEMPO.Invoke(false);
+            ControlZoneEnter.Invoke(false);
         }
     }
 
 
-    public static UnityAction<bool> NOQUEDATIEMPO;
-    public static UnityAction<bool> SIQUEDATIEMPO;
+    public static UnityAction<bool> ControlZoneEnter;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("NOQUEDATIEMPO"))
         {
-            NOQUEDATIEMPO.Invoke(true);
+            ControlZoneEnter.Invoke(true);
         }
     }
 

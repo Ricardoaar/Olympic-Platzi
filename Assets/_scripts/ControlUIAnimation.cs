@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class NOQUEDATIEMPO : MonoBehaviour
+public class ControlUIAnimation : MonoBehaviour
 {
     [SerializeField] private Animator anim;
     private static readonly int AnimatorNoquedatiempo = Animator.StringToHash("NOQUEDATIEMPO");
@@ -12,12 +12,12 @@ public class NOQUEDATIEMPO : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerPlatformInput.NOQUEDATIEMPO += Noquedatiempo;
+        PlayerPlatformInput.ControlZoneEnter += Noquedatiempo;
     }
 
     private void OnDisable()
     {
-        PlayerPlatformInput.NOQUEDATIEMPO -= Noquedatiempo;
+        PlayerPlatformInput.ControlZoneEnter -= Noquedatiempo;
     }
 
     private void Noquedatiempo(bool arg0)
