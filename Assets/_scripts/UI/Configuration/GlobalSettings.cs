@@ -13,7 +13,8 @@ public enum TxtCategory
 {
     H1,
     MediumText,
-    SmallText
+    SmallText,
+    textUI
 }
 
 public enum TxtSize
